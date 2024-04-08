@@ -1,0 +1,32 @@
+# DfsHdfs
+
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**actionStatus** | **String** |  |  [optional]
+**authToLocals** | **List&lt;String&gt;** |  |  [optional]
+**authType** | **String** |  |  [optional]
+**blockSize** | **Long** |  |  [optional]
+**checksumType** | **String** |  |  [optional]
+**cluster** | [**ClusterNestview**](ClusterNestview.md) |  |  [optional]
+**create** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
+**description** | **String** |  |  [optional]
+**dfsGatewayGroup** | [**DfsGatewayGroupNestview**](DfsGatewayGroupNestview.md) |  |  [optional]
+**dfsGatewayZone** | [**DfsGatewayZoneNestview**](DfsGatewayZoneNestview.md) |  |  [optional]
+**dfsHdfsAclNum** | **Long** |  |  [optional]
+**dfsHdfsIpWhiteLists** | [**List&lt;DfsHdfsIPWhiteList&gt;**](DfsHdfsIPWhiteList.md) |  |  [optional]
+**dfsHdfsIpWhiteListsNum** | **Long** |  |  [optional]
+**dfsHdfsProxyUserNum** | **Long** |  |  [optional]
+**dfsPath** | [**DfsPathNestview**](DfsPathNestview.md) |  |  [optional]
+**id** | **Long** |  |  [optional]
+**kerberos** | [**FSKerberosNestview**](FSKerberosNestview.md) |  |  [optional]
+**name** | **String** |  |  [optional]
+**port** | **Long** |  |  [optional]
+**principalName** | **String** |  |  [optional]
+**ranger** | **Boolean** |  |  [optional]
+**rangerIp** | **String** |  |  [optional]
+**rangerServiceName** | **String** |  |  [optional]
+**rangerUrl** | **String** |  |  [optional]
+**securities** | **List&lt;String&gt;** |  |  [optional]
+**status** | **String** |  |  [optional]
+**update** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]

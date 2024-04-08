@@ -1,0 +1,33 @@
+# OspUser
+
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**qos** | [**OspQos**](OspQos.md) |  |  [optional]
+**bucketNumberInRecycle** | **Long** |  |  [optional]
+**canonicalId** | **String** |  |  [optional]
+**suspended** | **Boolean** |  |  [optional]
+**opMask** | [**OspOpMask**](OspOpMask.md) |  |  [optional]
+**id** | **Long** |  |  [optional]
+**create** | **String** |  |  [optional]
+**selectStoragePolicies** | [**List&lt;OspNestedStoragePolicy&gt;**](OspNestedStoragePolicy.md) |  |  [optional]
+**bucketQos** | [**OspQos**](OspQos.md) |  |  [optional]
+**tenantQuota** | [**OspTenantQuota**](OspTenantQuota.md) |  |  [optional]
+**policy** | **List&lt;String&gt;** |  |  [optional]
+**type** | [**OspUserType**](OspUserType.md) |  |  [optional]
+**email** | **String** |  |  [optional]
+**bucketQuota** | [**OspBucketQuota**](OspBucketQuota.md) |  |  [optional]
+**status** | **String** |  |  [optional]
+**tenantQos** | [**OspQos**](OspQos.md) |  |  [optional]
+**description** | **String** |  |  [optional]
+**bucketNumber** | **Long** |  |  [optional]
+**quota** | [**OspUserQuota**](OspUserQuota.md) |  |  [optional]
+**update** | **String** |  |  [optional]
+**locationConstraintEnabled** | **Boolean** |  |  [optional]
+**properties** | [**OspUserProperties**](OspUserProperties.md) |  |  [optional]
+**tenant** | **String** |  |  [optional]
+**nfsUsed** | **Boolean** |  |  [optional]
+**metricEnabled** | **Boolean** |  |  [optional]
+**name** | **String** |  |  [optional]
+**admin** | **Boolean** |  |  [optional]
+**maxBuckets** | **Long** |  |  [optional]

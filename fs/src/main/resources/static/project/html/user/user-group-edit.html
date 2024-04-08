@@ -1,0 +1,70 @@
+<div cg-busy="{promise:formLoadingLayer, minDuration:500}" ng-cloak>
+    <md-toolbar class="content-toolbar">
+        <div class="md-toolbar-tools">
+            <div class="md-toolbar-tools">
+                <div ng-if="tmpItem.id">编辑用户组</div>
+                <div ng-if="!tmpItem.id">创建用户组</div>
+            </div>
+        </div>
+    </md-toolbar>
+    <md-content class="md-padding">
+        <form name="UserUpdateForm">
+            <div class="md-dialog-content" layout="column">
+                <div layout="column">
+                    <md-input-container flex="auto" style="margin-top: 10px">
+                        <label>名称</label>
+                        <input type="text" required  name="name" ng-model="tmpItem.name" />
+                    </md-input-container>
+
+                    <md-input-container class="md-block" style="margin-top: -10px" ng-if="accountList.length > 1">
+                        <label>所属设备</label>
+                        <md-select ng-model="tmpItem.accountId" ng-change="onAccountChange(tmpItem.accountId)" ng-disabled="tmpItem.id">
+                            <md-option ng-repeat="account in accountList" value="{{account.id}}">
+                                {{account.description}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container flex="auto" ng-if="isAdmin && !tmpItem.id" style="margin-top: 10px">
+                        <label>组织</label>
+                        <md-select required ng-model="tmpItem.organization" name="organization" ng-change="onOrganizationChange(tmpItem.organization)" md-on-close="searchModel = ''">
+                            <md-select-header class="select-header">
+                                <input class="select-search" ng-model="searchModel" placeholder="按名称搜索" autocomplete="off"
+                                       ng-keydown="$event.stopPropagation()">
+                            </md-select-header>
+                            <md-optgroup label="组织名称">
+                                <md-option ng-repeat="model in organizationList | filter:{name:searchModel}" ng-value="model.id">{{model.name}}
+                                </md-option>
+                            </md-optgroup>
+                        </md-select>
+                    </md-input-container>
+                    <md-input-container flex="auto" ng-if="(isAdmin || isOrgAdmin) && !tmpItem.id">
+                        <label>工作空间</label>
+                        <md-select required ng-model="tmpItem.workspace" name="workspace" md-on-close="searchModel1 = ''">
+                            <md-select-header class="select-header">
+                                <input class="select-search" ng-model="searchModel1" placeholder="按名称搜索" autocomplete="off"
+                                       ng-keydown="$event.stopPropagation()">
+                            </md-select-header>
+                            <md-optgroup label="工作空间名称">
+                                <md-option ng-repeat="space in workspaceList | filter:{name:searchModel1}" ng-value="space.id">{{space.name}}
+                                </md-option>
+                            </md-optgroup>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" ng-if="userList.length > 0 && tmpItem.workspace && tmpItem.organization">
+                        <label>用户</label>
+                        <choose items="userList" display="name" key="userId" selected="tmpItem.userIdList" height="300px"></choose>
+                    </md-input-container>
+                </div>
+            </div>
+        </form>
+    </md-content>
+        <md-button class="md-raised md-primary" ng-disabled="UserUpdateForm.$invalid"
+                   ng-click="save('userGroup', tmpItem)">
+            提交
+        </md-button>
+        <md-button class="md-raised" ng-click="toggleForm()">
+            取消
+        </md-button>
+</div>

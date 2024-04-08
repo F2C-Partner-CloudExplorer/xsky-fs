@@ -1,0 +1,31 @@
+<div layout-fill ng-cloak>
+    <md-toolbar class="content-toolbar">
+        <div class="md-toolbar-tools">
+            <div ng-if="item.id">编辑存储类型</div>
+            <div ng-if="!item.id">添加存储类型</div>
+        </div>
+    </md-toolbar>
+    <form name="bucketTypeEditForm" class="side-content">
+        <div layout="column">
+            <md-input-container class="md-block">
+                <label>存储类型</label>
+                <input required type="text" placeholder="存储类型" name="platform" ng-model="item.platform">
+                <div ng-messages="bucketTypeEditForm.platform.$error">
+                    <div ng-message="required">必填.</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>备注</label>
+                <input type="text" placeholder="备注" name="remark" ng-model="item.remark">
+            </md-input-container>
+        </div>
+    </form>
+    <div layout="row" layout-align="start center" layout-margin>
+        <md-button class="md-raised" ng-click="toggleForm()">
+            取消
+        </md-button>
+        <md-button class="md-raised md-primary" ng-click="editBucketTypeSubmit(item)" ng-disabled="bucketTypeEditForm.$invalid">
+            保存
+        </md-button>
+    </div>
+</div>

@@ -1,0 +1,80 @@
+<div cg-busy="{promise:formLoadingLayer, minDuration:500}" ng-cloak>
+    <md-toolbar class="content-toolbar">
+        <div class="md-toolbar-tools">
+            <div>创建租户</div>
+        </div>
+    </md-toolbar>
+    <md-content class="md-padding">
+        <form name="UserAddForm">
+            <div class="md-dialog-content" layout="column">
+                <div layout="column">
+                    <md-input-container class="md-block" style="margin-top: 15px">
+                        <label>用户名称</label>
+                        <input type="text" md-maxlength="15" name="name" ng-model="tmpItem.name" placeholder="对象用户名称全集群唯一，必须小写英文，名称不能带有下划线_,不可重复" required/>
+                        <div ng-messages="UserAddForm.name.$error">
+                            <div ng-message="required">必填</div>
+                            <div ng-message="md-maxlength">不超过15个字符</div>
+                            <span class="error" ng-show="nameshow"><br/>对象用户名称全集群唯一，必须小写英文，名称不能带有下划线_,不可重复!</span>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block" style="margin-top: -10px">
+                        <label>邮箱</label>
+                        <input type="email" md-maxlength="30" name="email" ng-model="tmpItem.email"/>
+                        <div ng-messages="UserAddForm.email.$error">
+                            <div ng-message="required">必填</div>
+                            <div ng-message="md-maxlength">不超过30个字符</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container flex="auto" style="margin-top: -10px">
+                        <label>所属环境</label>
+                        <md-select ng-model="tmpItem.accountId" name="accountId" required md-on-close="searchModel = ''">
+                            <md-select-header class="select-header">
+                                <input class="select-search" ng-model="searchModel" placeholder="按名称搜索" autocomplete="off"
+                                       ng-keydown="$event.stopPropagation()">
+                            </md-select-header>
+                            <md-optgroup label="所属环境名称">
+                                <md-option ng-repeat="model in xskyAccounts | filter:{name:searchModel}" ng-value="model.key">{{model.name}}
+                                </md-option>
+                            </md-optgroup>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container flex="auto" ng-if="isAdmin">
+                        <label>组织</label>
+                        <md-select ng-model="tmpItem.costcenterId" name="costcenterId" ng-change="listWorkSpaceChange()" md-on-close="searchModel = ''">
+                            <md-select-header class="select-header">
+                                <input class="select-search" ng-model="searchModel" placeholder="按组织名称搜索" autocomplete="off"
+                                       ng-keydown="$event.stopPropagation()">
+                            </md-select-header>
+                            <md-optgroup label="组织机构名称">
+                                <md-option ng-repeat="model in models | filter:{name:searchModel}" ng-value="model.key">{{model.name}}
+                                </md-option>
+                            </md-optgroup>
+                        </md-select>
+                    </md-input-container>
+                    <md-input-container flex="auto" ng-if="isAdmin || isOrgAdmin">
+                        <label>工作空间</label>
+                        <md-select ng-model="tmpItem.groupId" name="groupId" md-on-close="searchModel = ''">
+                            <md-select-header class="select-header">
+                                <input class="select-search" ng-model="searchModel" placeholder="按名称搜索" autocomplete="off"
+                                       ng-keydown="$event.stopPropagation()">
+                            </md-select-header>
+                            <md-optgroup label="工作空间名称">
+                                <md-option ng-repeat="group in groups | filter:{name:searchModel}" ng-value="group.key">{{group.name}}
+                                </md-option>
+                            </md-optgroup>
+                        </md-select>
+                    </md-input-container>
+                </div>
+            </div>
+        </form>
+    </md-content>
+        <md-button class="md-raised md-primary" ng-disabled="UserAddForm.$invalid"
+                   ng-click="saveAccount(tmpItem, 'CREATE')">
+            保存
+        </md-button>
+        <md-button class="md-raised" ng-click="toggleForm()">
+            取消
+        </md-button>
+</div>

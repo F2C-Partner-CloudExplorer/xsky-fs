@@ -1,0 +1,48 @@
+<div layout-fill ng-cloak>
+    <md-toolbar class="content-toolbar">
+        <div class="md-toolbar-tools">
+            <div ng-if="item.id">编辑策略</div>
+            <div ng-if="!item.id">添加策略</div>
+        </div>
+    </md-toolbar>
+    <form name="configEditForm" class="side-content">
+        <div layout="column">
+            <md-input-container class="md-block">
+                <label>存储类型</label>
+                <md-select name="platform" ng-disabled="item.id" ng-model="item.platform" required>
+                    <md-option ng-value="p.platform" ng-repeat="p in platforms">{{p.platform}}</md-option>
+                </md-select>
+                <div ng-messages="configEditForm.platform.$error">
+                    <div ng-message="required">必填.</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>价格(元/个数/天)</label>
+                <input required type="number" placeholder="每天价格" name="disk"
+                       ng-model="item.capacityPrice" min="0.0001" max="999.9999"/>
+                <div ng-messages="configEditForm.capacityPrice.$error">
+                    <div ng-message="required">必填.</div>
+                    <div ng-message="min">价格不能小于 0.0001</div>
+                    <div ng-message="max">价格不能大于 999.9999</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>环境</label>
+                <md-select name="env" ng-model="item.env" required>
+                    <md-option ng-value="p" ng-repeat="p in envList">{{p}}</md-option>
+                </md-select>
+                <div ng-messages="configEditForm.env.$error">
+                    <div ng-message="required">必填.</div>
+                </div>
+            </md-input-container>
+        </div>
+    </form>
+    <div layout="row" layout-align="start center" layout-margin>
+        <md-button class="md-raised" ng-click="toggleForm()">
+            取消
+        </md-button>
+        <md-button class="md-raised md-primary" ng-click="editPolicySubmit(item)" ng-disabled="configEditForm.$invalid">
+            保存
+        </md-button>
+    </div>
+</div>

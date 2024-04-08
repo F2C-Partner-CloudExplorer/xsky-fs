@@ -1,0 +1,70 @@
+<div cg-busy="{promise:formLoadingLayer, minDuration:500}" ng-cloak>
+    <md-toolbar class="content-toolbar">
+        <div class="md-toolbar-tools">
+            <div>添加XSKY设备</div>
+        </div>
+    </md-toolbar>
+    <form class="md-padding" name="AccountAddForm">
+        <div layout="column">
+            <md-input-container class="md-block">
+                <label>名称</label>
+                <input type="text" md-maxlength="50" name="s3Region" ng-model="item.name" required/>
+                <div ng-messages="AccountAddForm.name.$error">
+                    <div ng-message="required">必填</div>
+                    <div ng-message="md-maxlength">不超过50个字符</div>
+                </div>
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <label>存储类型</label>
+                <md-select name="platform" ng-disabled="item.id" ng-model="item.platform" required>
+                    <md-option ng-value="p.platform" ng-repeat="p in platforms">{{p.platform}}</md-option>
+                </md-select>
+                <div ng-messages="AccountAddForm.platform.$error">
+                    <div ng-message="required">必填.</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>XSKY地址</label>
+                <input type="text" md-maxlength="50" name="xskyEndpoint" ng-model="item.xskyEndpoint" required/>
+                <div ng-messages="AccountAddForm.xskyEndpoint.$error">
+                    <div ng-message="required">必填</div>
+                    <div ng-message="md-maxlength">不超过50个字符</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>XSKY用户名</label>
+                <input type="text" md-maxlength="50" name="username" ng-model="item.username" required/>
+                <div ng-messages="AccountAddForm.username.$error">
+                    <div ng-message="required">必填</div>
+                    <div ng-message="md-maxlength">不超过50个字符</div>
+                </div>
+            </md-input-container>
+<!--            <md-input-container class="md-block">-->
+<!--                <label>密码</label>-->
+<!--                <input type="password" md-maxlength="50" name="password" ng-model="item.password" required/>-->
+<!--                <div ng-messages="AccountAddForm.password.$error">-->
+<!--                    <div ng-message="required">必填</div>-->
+<!--                    <div ng-message="md-maxlength">不超过50个字符</div>-->
+<!--                </div>-->
+<!--            </md-input-container>-->
+            <md-input-container class="md-block">
+                <label>token</label>
+                <input type="password" md-maxlength="100" name="token" ng-model="item.token" required/>
+                <div ng-messages="AccountAddForm.token.$error">
+                    <div ng-message="required">必填</div>
+                    <div ng-message="md-maxlength">不超过100个字符</div>
+                </div>
+            </md-input-container>
+        </div>
+    </form>
+    <div layout="row" layout-align="start center" layout-margin>
+        <md-button class="md-raised md-primary" ng-disabled="AccountAddForm.$invalid"
+                   ng-click="saveAccount(item, 'create')">
+            保存
+        </md-button>
+        <md-button class="md-raised" ng-click="toggleForm()">
+            取消
+        </md-button>
+    </div>
+</div>

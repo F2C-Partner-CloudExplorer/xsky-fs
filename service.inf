@@ -1,0 +1,4 @@
+name=文件存储服务
+description=XSKY 文件存储
+version=V2.0
+minimumFit2cloudVersion=V2.0.100

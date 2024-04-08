@@ -1,0 +1,69 @@
+<div ng-cloak ng-controller="OrderItemLogController" cg-busy="{promise:loadingLayer,minDuration:500}">
+    <div layout-fill class="side-info">
+        <md-toolbar class="content-toolbar">
+            <div class="md-toolbar-tools">
+                <div>日志详情</div>
+                <div flex></div>
+                <md-button class="md-primary" ng-click="toggleForm();destroyTimer()">关闭</md-button>
+            </div>
+        </md-toolbar>
+        <div class="md-padding">
+            <span ng-if="orderItemLogDTOs.length == 0">没有数据<br></span>
+            <md-content ng-if="orderItemLogDTOs.length > 0" class="order-log">
+                <table dynamic-table>
+                    <tbody ng-repeat="orderLog in orderItemLogDTOs">
+                    <tr ng-if="orderLog.product.name">
+                        <td><img ng-if="orderLog.product.iconUrl" width="32px"
+                                 height="32px" style="vertical-align:middle"
+                                 ng-src="{{orderLog.product.iconUrl}}">&nbsp;&nbsp;&nbsp;
+                            {{orderLog.product.name}}
+                        </td>
+                        <td ng-switch="orderLog.orderItem.status">
+                            <span ng-switch-when="PROCESSING">
+                                <span class="icon-refresh icon-large icon-spin" style="margin-right: 7px"></span>正在处理...
+                            </span>
+                            <span ng-switch-when="FINISHED">已完成</span>
+                            <span ng-switch-when="WARNING">警告</span>
+                            <span ng-switch-when="ERROR">异常</span>
+                            <span ng-switch-when="TERMINATED">已终止</span>
+                            <span ng-switch-when="UNCHECKED">未处理</span>
+                            <span ng-switch-default>{{orderLog.orderItem.status}}</span>
+                        </td>
+                        <td>数量：{{orderLog.orderItem.count}}</td>
+                    </tr>
+                    <!-- 没有产品信息则不显示第一行tr -->
+                    <tr ng-show="false" ng-if="!orderLog.product.name">
+                        <td ng-switch="orderLog.orderItem.status" colspan="4">
+                            <span ng-switch-when="PROCESSING">
+                                <span class="icon-refresh icon-large icon-spin" style="margin-right: 7px"></span>正在处理...
+                            </span>
+                            <span ng-switch-when="FINISHED">已完成</span>
+                            <span ng-switch-when="WARNING">警告</span>
+                            <span ng-switch-when="ERROR">异常</span>
+                            <span ng-switch-when="TERMINATED">已终止</span>
+                            <span ng-switch-when="UNCHECKED">未处理</span>
+                            <span ng-switch-default>{{orderLog.orderItem.status}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="white-space: normal" colspan="3">
+                            <span ng-if="orderLog.orderItemLogList == null || orderLog.orderItemLogList.length ==0">
+                                没有数据<br></span>
+                            <span ng-repeat="logItem in orderLog.orderItemLogList"
+                               ng-class="{true: 'color-red', false: ''}[logItem.result == false]">
+                                {{logItem.createTime | date:'yyyy-MM-dd HH:mm:ss'}}
+                                {{logItem.operator}}
+                                {{logItem.operation}}
+                                {{logItem.output}}<br>
+                            </span>
+                            <div ng-if="orderLog.orderItem.status.indexOf('ING') > -1" style="height: 30px">
+                                <i class="fas fa-spinner fa-spin"></i>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </md-content>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,372 @@
+{
+  "version": "2.0",
+  "permissions": [
+    {
+      "id": "FLOW:MANAGER",
+      "name": "流程管理",
+      "resourceId": "FLOW",
+      "parentRoles": [
+        "ADMIN"
+      ]
+    },
+    {
+      "id": "ACCOUNT:MANAGER",
+      "name": "XSKY设备管理",
+      "resourceId": "ACCOUNT",
+      "parentRoles": [
+        "ADMIN"
+      ]
+    },
+    {
+      "id": "ORDER:READ",
+      "name": "查看订单",
+      "resourceId": "ORDER",
+      "parentRoles": [
+        "ADMIN",
+        "ORGADMIN",
+        "USER"
+      ]
+    },
+    {
+      "id": "USER:READ",
+      "name": "查看文件用户",
+      "resourceId": "USER",
+      "parentRoles": [
+        "ADMIN",
+        "USER",
+        "ORGADMIN"
+      ]
+    },
+    {
+      "id": "USER:CREATE",
+      "name": "创建文件用户",
+      "resourceId": "USER",
+      "parentRoles": [
+        "ADMIN",
+        "USER",
+        "ORGADMIN"
+      ]
+    },
+    {
+      "id": "USER:DELETE",
+      "name": "删除文件用户",
+      "resourceId": "USER",
+      "parentRoles": [
+        "ADMIN",
+        "USER",
+        "ORGADMIN"
+      ]
+    },
+    {
+      "id": "USER:EDIT",
+      "name": "编辑文件用户",
+      "resourceId": "USER",
+      "parentRoles": [
+        "ADMIN",
+        "USER",
+        "ORGADMIN"
+      ]
+    },
+    {
+      "id": "USER_GROUP:READ",
+      "name": "查看文件用户组",
+      "resourceId": "USER_GROUP",
+      "parentRoles": [
+        "ADMIN",
+        "USER",
+        "ORGADMIN"
+      ]
+    },
+    {
+      "id": "USER_GROUP:CREATE",
+      "name": "创建文件用户组",
+      "resourceId": "USER_GROUP",
+      "parentRoles": [
+        "ADMIN",
+        "USER",
+        "ORGADMIN"
+      ]
+    },
+    {
+      "id": "USER_GROUP:DELETE",
+      "name": "删除文件用户组",
+      "resourceId": "USER_GROUP",
+      "parentRoles": [
+        "ADMIN",
+        "USER",
+        "ORGADMIN"
+      ]
+    },
+    {
+      "id": "USER_GROUP:EDIT",
+      "name": "编辑文件用户组",
+      "resourceId": "USER_GROUP",
+      "parentRoles": [
+        "ADMIN",
+        "USER",
+        "ORGADMIN"
+      ]
+    },
+    {
+      "id": "CLIENT:READ",
+      "name": "查看文件客户端",
+      "resourceId": "CLIENT",
+      "parentRoles": [
+        "ADMIN",
+        "USER",
+        "ORGADMIN"
+      ]
+    },
+    {
+      "id": "CLIENT:CREATE",
+      "name": "创建文件客户端",
+      "resourceId": "CLIENT",
+      "parentRoles": [
+        "ADMIN",
+        "USER",
+        "ORGADMIN"
+      ]
+    },
+    {
+      "id": "CLIENT:DELETE",
+      "name": "删除文件客户端",
+      "resourceId": "CLIENT",
+      "parentRoles": [
+        "ADMIN",
+        "USER",
+        "ORGADMIN"
+      ]
+    },
+    {
+      "id": "CLIENT:EDIT",
+      "name": "编辑文件客户端",
+      "resourceId": "CLIENT",
+      "parentRoles": [
+        "ADMIN",
+        "USER",
+        "ORGADMIN"
+      ]
+    },
+    {
+      "id": "CLIENT_GROUP:READ",
+      "name": "查看文件客户端组",
+      "resourceId": "CLIENT_GROUP",
+      "parentRoles": [
+        "ADMIN",
+        "USER",
+        "ORGADMIN"
+      ]
+    },
+    {
+      "id": "CLIENT_GROUP:CREATE",
+      "name": "创建文件客户端组",
+      "resourceId": "CLIENT_GROUP",
+      "parentRoles": [
+        "ADMIN",
+        "USER",
+        "ORGADMIN"
+      ]
+    },
+    {
+      "id": "CLIENT_GROUP:DELETE",
+      "name": "删除文件客户端组",
+      "resourceId": "CLIENT_GROUP",
+      "parentRoles": [
+        "ADMIN",
+        "USER",
+        "ORGADMIN"
+      ]
+    },
+    {
+      "id": "CLIENT_GROUP:EDIT",
+      "name": "编辑文件客户端组",
+      "resourceId": "CLIENT_GROUP",
+      "parentRoles": [
+        "ADMIN",
+        "USER",
+        "ORGADMIN"
+      ]
+    },
+    {
+      "id": "GATEWAY_GROUP:READ",
+      "name": "查看网关组",
+      "resourceId": "GATEWAY_GROUP",
+      "parentRoles": [
+        "ADMIN",
+        "USER",
+        "ORGADMIN"
+      ]
+    },
+    {
+      "id": "FOLDER:READ",
+      "name": "查看文件系统",
+      "resourceId": "FOLDER",
+      "parentRoles": [
+        "ADMIN",
+        "USER",
+        "ORGADMIN"
+      ]
+    },
+    {
+      "id": "FOLDER_SHARE:READ",
+      "name": "查看文件系统",
+      "resourceId": "FOLDER_SHARE",
+      "parentRoles": [
+        "ADMIN",
+        "USER",
+        "ORGADMIN"
+      ]
+    },
+    {
+      "id": "QUOTA:MANAGER",
+      "name": "配额管理",
+      "resourceId": "QUOTA",
+      "parentRoles": [
+        "ADMIN",
+        "ORGADMIN",
+        "USER"
+      ]
+    },
+    {
+      "id": "QUOTA:READ",
+      "name": "查看组织配额",
+      "resourceId": "QUOTA",
+      "parentRoles": [
+        "ADMIN"
+      ]
+    },
+    {
+      "id": "QUOTA:READ+EDIT",
+      "name": "编辑组织配额",
+      "resourceId": "QUOTA",
+      "parentRoles": [
+        "ADMIN"
+      ]
+    },
+    {
+      "id": "QUOTA:READ+EDIT_DEFAULT",
+      "name": "保存组织配额",
+      "resourceId": "QUOTA",
+      "parentRoles": [
+        "ADMIN"
+      ]
+    },    {
+      "id": "QUOTA_WORKSPACE:READ",
+      "name": "查看工作空间配额",
+      "resourceId": "QUOTA_WORKSPACE",
+      "parentRoles": [
+        "ORGADMIN"
+      ]
+    },
+    {
+      "id": "QUOTA_WORKSPACE:READ+EDIT_DEFAULT",
+      "name": "保存工作空间配额",
+      "resourceId": "QUOTA_WORKSPACE",
+      "parentRoles": [
+        "ADMIN"
+      ]
+    },
+    {
+      "id": "QUOTA_WORKSPACE:READ+EDIT",
+      "name": "编辑工作空间配额",
+      "resourceId": "QUOTA_WORKSPACE",
+      "parentRoles": [
+        "ORGADMIN",
+        "ADMIN"
+      ]
+    },
+    {
+      "id": "QUOTA_USER:READ",
+      "name": "查看用户配额",
+      "resourceId": "QUOTA_USER",
+      "parentRoles": [
+        "USER"
+      ]
+    },
+    {
+      "id": "POLICY:READ",
+      "name": "查看价格策略",
+      "resourceId": "POLICY",
+      "parentRoles": [
+        "ADMIN"
+      ]
+    },
+    {
+      "id": "POLICY:READ+CREATE",
+      "name": "创建",
+      "resourceId": "POLICY",
+      "parentRoles": [
+        "ADMIN"
+      ]
+    },
+    {
+      "id": "POLICY:READ+EDIT",
+      "name": "编辑",
+      "resourceId": "POLICY",
+      "parentRoles": [
+        "ADMIN"
+      ]
+    },
+    {
+      "id": "POLICY:READ+DELETE",
+      "name": "删除",
+      "resourceId": "POLICY",
+      "parentRoles": [
+        "ADMIN"
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "id": "ACCOUNT",
+      "name": "设备"
+    },
+    {
+      "id": "ORDER",
+      "name": "订单"
+    },
+    {
+      "id": "USER",
+      "name": "文件用户"
+    },
+    {
+      "id": "USER_GROUP",
+      "name": "文件用户组"
+    },
+    {
+      "id": "CLIENT",
+      "name": "客户端"
+    },
+    {
+      "id": "CLIENT_GROUP",
+      "name": "客户端组"
+    },
+    {
+      "id": "FOLDER",
+      "name": "文件系统"
+    },
+    {
+      "id": "FOLDER_SHARE",
+      "name": "文件系统共享"
+    },
+    {
+      "id": "GATEWAY_GROUP",
+      "name": "文件网关组"
+    },
+    {
+      "id": "FLOW",
+      "name": "流程"
+    },
+    {
+      "id": "QUOTA",
+      "name": "配额管理"
+    },    {
+      "id": "QUOTA_WORKSPACE",
+      "name": "工作空间配额"
+    },
+    {
+      "id": "QUOTA_USER",
+      "name": "用户配额"
+    }
+  ]
+}

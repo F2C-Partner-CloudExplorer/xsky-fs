@@ -1,0 +1,32 @@
+# OspStoragePolicy
+
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**lifecycleSchedulePeriod** | **Long** |  |  [optional]
+**zoneGroup** | [**OspNestedZoneGroup**](OspNestedZoneGroup.md) |  |  [optional]
+**recycleBin** | **String** |  |  [optional]
+**externalStorageClasses** | [**List&lt;OspExternalStorageClass&gt;**](OspExternalStorageClass.md) |  |  [optional]
+**secondCacheStorageClass** | [**OspStorageClass**](OspStorageClass.md) |  |  [optional]
+**id** | **Long** |  |  [optional]
+**compact** | [**OspStoragePolicyCompact**](OspStoragePolicyCompact.md) |  |  [optional]
+**create** | **String** |  |  [optional]
+**multiProtocol** | **Boolean** |  |  [optional]
+**dedup** | **Boolean** |  |  [optional]
+**lifecycleZone** | **Long** |  |  [optional]
+**replicationSchedulePeriod** | **Long** |  |  [optional]
+**version** | **String** |  |  [optional]
+**status** | **String** |  |  [optional]
+**description** | **String** |  |  [optional]
+**compress** | **String** |  |  [optional]
+**update** | **String** |  |  [optional]
+**cacheStorageClass** | [**OspStorageClass**](OspStorageClass.md) |  |  [optional]
+**dataStorageClasses** | [**List&lt;OspStorageClass&gt;**](OspStorageClass.md) |  |  [optional]
+**replicationZone** | **Long** |  |  [optional]
+**name** | **String** |  |  [optional]
+**rebuildZone** | **Long** |  |  [optional]
+**_default** | **Boolean** |  |  [optional]
+**bucketCount** | **Long** |  |  [optional]
+**lifecycleScheduleTime** | **String** |  |  [optional]
+**crypto** | **Boolean** |  |  [optional]
+**replicationScheduleTime** | **String** |  |  [optional]

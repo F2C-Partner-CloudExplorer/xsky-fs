@@ -1,0 +1,68 @@
+<div style="min-width: 1000px" ng-controller="OssOrderHandleController" cg-busy="{promise:childLoadingLayer,minDuration:500}" layout-fill>
+    <md-content>
+        <order-read-only current-product="currentProduct"></order-read-only>
+        <div layout-fill class="order-info">
+            <div class="order-info-head">
+                <span>更多信息</span>
+            </div>
+            <div class="order-info-content">
+                <div style="margin-top: 15px">
+                    <md-tabs layout-fill md-dynamic-height md-border-bottom>
+                        <md-tab label="订单信息">
+                            <md-content class="md-padding">
+                                <table layout-fill>
+                                    <tr>
+                                        <td class="order-info-label"><span>订单类型:</span></td>
+                                        <td class="order-info-value" ng-if="currentProduct.type == 'DELETE_FOLDER'"><span>删除文件系统</span></td>
+                                        <td class="order-info-value" ng-if="currentProduct.type == 'DELETE_SHARE'"><span>删除文件共享</span></td>
+                                        <td class="order-info-value" ng-if="currentProduct.type == 'CREATE_FOLDER'"><span>申请文件系统</span></td>
+                                        <td class="order-info-value" ng-if="currentProduct.type == 'UPDATE_FOLDER'"><span>变更文件系统</span></td>
+                                        <td class="order-info-value" ng-if="currentProduct.type == 'CREATE_SHARE'"><span>申请文件共享</span></td>
+                                        <td class="order-info-value" ng-if="currentProduct.type == 'UPDATE_SHARE'"><span>变更文件共享</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="order-info-label"><span>申请人:</span></td>
+                                        <td class="order-info-value"><user-info ng-if="currentProduct.applyUser" user-id="currentProduct.applyUser"></user-info></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="order-info-label"><span>申请时间:</span></td>
+                                        <td class="order-info-value"><span>{{currentProduct.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="order-info-label"><span>申请原因:</span></td>
+                                        <td class="order-info-value"><span>{{currentProduct.description}}</span></td>
+                                    </tr>
+                                </table>
+                            </md-content>
+                        </md-tab>
+
+                        <md-tab label="流程日志">
+                            <md-content class="md-padding">
+                                <table class="order-info-process hide-validation-error tree-table" layout-fill>
+                                    <thead>
+                                    <tr>
+                                        <th>环节名称</th>
+                                        <th>执行人</th>
+                                        <th>开始时间</th>
+                                        <th>结束时间</th>
+                                        <th>备注</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="log in logs">
+                                        <td>{{log.taskName}}</td>
+                                        <td><user-info user-ids="log.executors"></user-info></td>
+                                        <td>{{log.taskStartTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                        <td>{{log.taskEndTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                        <td>{{log.taskRemarks}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </md-content>
+                        </md-tab>
+                    </md-tabs>
+                </div>
+            </div>
+        </div>
+    </md-content>
+</div>

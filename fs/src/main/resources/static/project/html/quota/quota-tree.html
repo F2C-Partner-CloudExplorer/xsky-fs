@@ -1,0 +1,152 @@
+<div>
+    <div flex layout="column" ng-if="item.orgs.length > 0" style="padding: 10px 0;">
+        <table class="tree-table">
+            <thead>
+            <tr>
+                <th width="40px"></th>
+                <th>{{'i18n_organization' | translator:'组织'}}</th>
+                <th>{{'i18n_folder_count' | translator:'文件共享个数'}}</th>
+                <!--                            <th>文件系统容量</th>-->
+                <th>{{'i18n_default_quota' | translator:'默认配额'}}</th>
+                <th>{{'i18n_quota_exceed' | translator:'超额申请'}}</th>
+                <th>{{'i18n_opt' | translator:'操作'}}</th>
+            </tr>
+            </thead>
+            <tbody ng-repeat="g in item.orgs">
+            <tr ng-class="{'tr-selected':selected === g.$$hashKey}">
+                <td>
+                    <md-button ng-if="!g.show" class="md-icon-button" ng-click="showDetail(g)">
+                        <md-icon>chevron_right</md-icon>
+                    </md-button>
+                    <md-button ng-if="g.show" class="md-icon-button" ng-click="showDetail(g)">
+                        <md-icon>expand_more</md-icon>
+                    </md-button>
+                </td>
+
+                <td ng-bind="g.name"></td>
+
+                <td>
+                    {{'i18n_quota' | translator:'配额'}} {{g.quotaUsage.folderCount}},
+                    <span ng-class="{'color-red':item.quotaUsage.folderTotalCount > g.quotaUsage.folderCount}">
+                                        已分配 {{g.quotaUsage.folderTotalCount}}
+                                </span>,
+                    <span ng-class="{'color-red':g.quotaUsage.folderCountUsed > g.quotaUsage.folderCount}">
+                                        {{'i18n_quota_uesed' | translator:'已用'}} {{g.quotaUsage.folderCountUsed}}
+                                </span>
+                    <span ng-if="g.quotaUsage.folderCountUsed / g.quotaUsage.folderCount >= 0.9" style="color: yellow">
+                                                        使用率 {{g.quotaUsage.folderCountUsed / g.quotaUsage.folderCount *100 | number:2}}%
+                                                    </span>
+                    <span ng-if="g.quotaUsage.folderCountUsed / g.quotaUsage.folderCount < 0.9" >
+                                                        使用率 {{g.quotaUsage.folderCountUsed / g.quotaUsage.folderCount *100 | number:2}}%
+                                </span>
+                </td>
+
+                <!--                            <td>-->
+                <!--                                {{'i18n_quota' | translator:'配额'}} {{item.quotaUsage.folderSize}}GB,-->
+                <!--                                <span ng-class="{'color-red':item.quotaUsage.folderTotalSize > item.quotaUsage.folderSize}">-->
+                <!--                                        已分配 {{item.quotaUsage.folderTotalSize}}GB-->
+                <!--                                </span>,-->
+                <!--                                <span ng-class="{'color-red':item.quotaUsage.folderSizeUsed > item.quotaUsage.folderSize}">-->
+                <!--                                        {{'i18n_quota_uesed' | translator:'已用'}} {{item.quotaUsage.folderSizeUsed}}GB-->
+                <!--                                </span>-->
+                <!--                                <span ng-if="item.quotaUsage.folderSizeUsed / item.quotaUsage.folderSize >= 0.9" style="color: yellow">-->
+                <!--                                                        使用率 {{item.quotaUsage.folderSizeUsed / item.quotaUsage.folderSize *100 | number:2}}%-->
+                <!--                                                    </span>-->
+                <!--                                <span ng-if="item.quotaUsage.folderSizeUsed / item.quotaUsage.folderSize < 0.9" >-->
+                <!--                                                        使用率 {{item.quotaUsage.folderSizeUsed / item.quotaUsage.folderSize *100 | number:2}}%-->
+                <!--                                </span>-->
+                <!--                            </td>-->
+
+                <td>
+                    <span ng-if="g.quotaUsage.fsDefaultSetting == true">{{'i18n_yes' | translator:'是'}}</span>
+                    <span ng-if="g.quotaUsage.fsDefaultSetting == false">{{'i18n_no' | translator:'否'}}</span>
+                </td>
+                <td>
+                    <span ng-if="g.quotaUsage.folderAllocateResourceIfExceed == 'DEFAULT'"  >{{'i18n_quota_exceed_default' | translator:'默认'}}</span>
+                    <span ng-if="g.quotaUsage.folderAllocateResourceIfExceed == 'YES'"  >{{'i18n_quota_exceed_enable' | translator:'允许'}}</span>
+                    <span ng-if="g.quotaUsage.folderAllocateResourceIfExceed == 'NO'"  >{{'i18n_quota_exceed_disable' | translator:'禁止'}}</span>
+                </td>
+                <td>
+                    <md-button has-permission="QUOTA:READ+EDIT" ng-click="editQuota(true, g, false, 'org')" class="md-icon-button">
+                        <md-icon>edit</md-icon>
+                    </md-button>
+                </td>
+            </tr>
+            <tr ng-show="g.show" style="background-color: #FFFFFF">
+                <td style="border: 0" colspan="11">
+                    <quota-tree item="g"></quota-tree>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--                                    <div ng-if="item.workspaces.length === 0">该组织下没有工作空间</div>-->
+    <div flex layout="column" layout-fill ng-if="item.workspaces.length > 0" class="md-padding">
+        <table class="tree-table">
+            <thead>
+            <tr>
+                <th>{{'i18n_workspace' | translator:'工作空间'}}</th>
+                <th>{{'i18n_bucket_count' | translator:'文件共享个数'}}</th>
+                <!--                                            <th>文件系统容量</th>-->
+                <th>{{'i18n_default_quota' | translator:'默认配额'}}</th>
+                <th>{{'i18n_quota_exceed' | translator:'超额申请'}}</th>
+                <th>{{'i18n_opt' | translator:'操作'}}</th>
+            </tr>
+            </thead>
+            <tbody ng-repeat="item in item.workspaces" style="border-top: 0">
+            <tr>
+                <td style="background-color: #FFF;border-bottom: 1px solid #DFDFDF">
+                    {{item.name}}
+                </td>
+                <td>{{'i18n_quota' | translator:'配额'}} {{item.quotaUsage.folderCount}},
+                    <span ng-class="{'color-red':item.quotaUsage.folderCountUsed > item.quotaUsage.folderCount}">
+                                                    {{'i18n_quota_uesed' | translator:'已用'}}{{item.quotaUsage.folderCountUsed}}
+                                                </span>
+                    <span ng-if="item.quotaUsage.folderCountUsed / item.quotaUsage.folderCount >= 0.9" style="color: yellow">
+                                                        使用率 {{item.quotaUsage.folderCountUsed / item.quotaUsage.folderCount *100 | number:2}}%
+                                                    </span>
+                    <span ng-if="item.quotaUsage.folderCountUsed / item.quotaUsage.folderCount < 0.9" >
+                                                        使用率 {{item.quotaUsage.folderCountUsed / item.quotaUsage.folderCount *100 | number:2}}%
+                                                 </span>
+                </td>
+                <!--                                            <td>{{'i18n_quota' | translator:'配额'}} {{g.quotaUsage.folderSize}}GB,&nbsp&nbsp-->
+                <!--                                                <span ng-class="{'color-red':g.quotaUsage.folderSizeUsed > g.quotaUsage.folderSize}">-->
+                <!--                                                    {{'i18n_quota_uesed' | translator:'已用'}}{{g.quotaUsage.folderSizeUsed}}GB-->
+                <!--                                                </span>-->
+                <!--                                                <span ng-if="g.quotaUsage.folderSizeUsed / g.quotaUsage.folderSize >= 0.9" style="color: yellow">-->
+                <!--                                                        使用率 {{g.quotaUsage.folderSizeUsed / g.quotaUsage.folderSize *100 | number:2}}%-->
+                <!--                                                    </span>-->
+                <!--                                                <span ng-if="g.quotaUsage.folderSizeUsed / g.quotaUsage.folderSize < 0.9" >-->
+                <!--                                                        使用率 {{g.quotaUsage.folderSizeUsed / g.quotaUsage.folderSize *100 | number:2}}%-->
+                <!--                                                </span>-->
+                <!--                                            </td>-->
+                <td>
+                                                <span ng-if="item.quotaUsage.fsDefaultSetting == true"
+                                                      ng-bind="'i18n_yes' | translator:'是'">
+                                                </span>
+                    <span ng-if="item.quotaUsage.fsDefaultSetting == false"
+                          ng-bind="'i18n_no' | translator:'否'">
+                                                </span>
+                </td>
+                <td>
+                                                <span ng-if="item.quotaUsage.folderAllocateResourceIfExceed == 'DEFAULT'"
+                                                      ng-bind="'i18n_quota_exceed_default' | translator:'默认'">
+                                                </span>
+                    <span ng-if="item.quotaUsage.folderAllocateResourceIfExceed == 'YES'"
+                          ng-bind="'i18n_quota_exceed_enable' | translator:'允许'">
+                                                </span>
+                    <span ng-if="item.quotaUsage.folderAllocateResourceIfExceed == 'NO'"
+                          ng-bind="'i18n_quota_exceed_disable' | translator:'禁止'">
+                                                </span>
+                </td>
+                <td>
+                    <md-button has-permission="QUOTA_WORKSPACE:READ+EDIT" ng-click="editQuota(true, item, false, 'ws', item)"
+                               class="md-icon-button">
+                        <md-icon>edit</md-icon>
+                    </md-button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

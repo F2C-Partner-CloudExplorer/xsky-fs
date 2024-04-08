@@ -1,0 +1,48 @@
+<div ng-cloak layout-fill layout="column" cg-busy="{promise:aclLoadingLayer, minDuration:500}">
+    <md-toolbar class="content-toolbar">
+        <div class="md-toolbar-tools">
+            <div>共享文件</div>
+            <div flex></div>
+            <md-button class="md-primary" ng-click="toggleForm()">
+                <div>关闭列表</div>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-content flex="100">
+        <div layout-fill layout="column" flex="100">
+            <div layout="column">
+                <table class="tree-table">
+                    <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>名称</th>
+                        <th>共享路径</th>
+                        <th>共享地址</th>
+                        <th>网关组</th>
+                        <th>状态</th>
+                        <th>文件类型</th>
+                    </tr>
+                    </thead>
+                    <tr ng-repeat="(index, sharedFile) in sharedFiles">
+                        <td>{{index + 1}}</td>
+                        <td>{{sharedFile.name}}</td>
+                        <td>{{sharedFile.sharedPath}}</td>
+<!--                        <td>{{sharedFile.sharedAddress}}</td>-->
+                        <td>
+                            <p ng-repeat="shared in sharedFile.sharedAddress track by $index">
+                                {{shared}}
+                            </p>
+                        </td>
+                        <td>{{sharedFile.gatewayGroupName}}</td>
+                        <td ng-switch="sharedFile.status">
+                            <span ng-switch-when="active" style="color: green">健康</span>
+                            <span ng-switch-when="building" style="color: green">健康</span>
+                            <span ng-switch-default>{{item.status}}</span>
+                        </td>
+                        <td>{{sharedFile.fileType}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </md-content>
+</div>

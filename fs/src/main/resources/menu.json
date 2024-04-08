@@ -1,0 +1,328 @@
+{
+  "version": "2.0",
+  "menu": [
+    {
+      "id": "order-apply",
+      "order": 1,
+      "title": "订单管理",
+      "icon": "list_alt",
+      "name": "xsky_order_list",
+      "url": "/xsky/order/list",
+      "default": true,
+      "templateUrl": "project/html/order/order-list.html",
+      "requiredPermissions": [
+        {
+          "role": "ADMIN",
+          "logical": "OR",
+          "permissions": [
+            "ORDER:READ"
+          ]
+        },
+        {
+          "role": "ORGADMIN",
+          "logical": "OR",
+          "permissions": [
+            "ORDER:READ"
+          ]
+        },
+        {
+          "role": "USER",
+          "logical": "OR",
+          "permissions": [
+            "ORDER:READ"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fs",
+      "order": 2,
+      "title": "文件系统",
+      "icon": "ballot",
+      "children": [
+        {
+          "order": 1,
+          "title": "文件用户",
+          "name": "fs_user",
+          "url": "/fs/user",
+          "templateUrl": "project/html/user/user.html",
+          "requiredPermissions": [
+            {
+              "role": "ADMIN",
+              "logical": "OR",
+              "permissions": [
+                "USER:READ"
+              ]
+            },
+            {
+              "role": "ORGADMIN",
+              "logical": "OR",
+              "permissions": [
+                "USER:READ"
+              ]
+            },
+            {
+              "role": "USER",
+              "logical": "OR",
+              "permissions": [
+                "USER:READ"
+              ]
+            }
+          ]
+        },
+        /*{
+          "order": 2,
+          "title": "文件客户端",
+          "name": "fs_client",
+          "url": "/fs/client",
+          "templateUrl": "project/html/client/client.html",
+          "requiredPermissions": [
+            {
+              "role": "ADMIN",
+              "logical": "OR",
+              "permissions": [
+                "CLIENT:READ"
+              ]
+            },
+            {
+              "role": "ORGADMIN",
+              "logical": "OR",
+              "permissions": [
+                "CLIENT:READ"
+              ]
+            },
+            {
+              "role": "USER",
+              "logical": "OR",
+              "permissions": [
+                "CLIENT:READ"
+              ]
+            }
+          ]
+        },*/
+        {
+          "order": 3,
+          "title": "文件网关组",
+          "name": "fs_gateway",
+          "url": "/fs/gateway",
+          "templateUrl": "project/html/gateway/gateway-group-list.html",
+          "requiredPermissions": [
+            {
+              "role": "ADMIN",
+              "logical": "OR",
+              "permissions": [
+                "GATEWAY_GROUP:READ"
+              ]
+            },
+            {
+              "role": "ORGADMIN",
+              "logical": "OR",
+              "permissions": [
+                "GATEWAY_GROUP:READ"
+              ]
+            },
+            {
+              "role": "USER",
+              "logical": "OR",
+              "permissions": [
+                "GATEWAY_GROUP:READ"
+              ]
+            }
+          ]
+        },
+//        {
+//          "order": 4,
+//          "title": "文件系统",
+//          "name": "fs_folder",
+//          "url": "/fs/folder",
+//          "templateUrl": "project/html/folder/folder-list.html",
+//          "requiredPermissions": [
+//            {
+//              "role": "ADMIN",
+//              "logical": "OR",
+//              "permissions": [
+//                "FOLDER:READ"
+//              ]
+//            },
+//            {
+//              "role": "ORGADMIN",
+//              "logical": "OR",
+//              "permissions": [
+//                "FOLDER:READ"
+//              ]
+//            },
+//            {
+//              "role": "USER",
+//              "logical": "OR",
+//              "permissions": [
+//                "FOLDER:READ"
+//              ]
+//            }
+//          ]
+//        },
+        {
+          "order": 4,
+          "title": "文件共享",
+          "name": "fs_share",
+          "url": "/fs/share",
+          "templateUrl": "project/html/share/share.html",
+          "requiredPermissions": [
+            {
+              "role": "ADMIN",
+              "logical": "OR",
+              "permissions": [
+                "FOLDER_SHARE:READ"
+              ]
+            },
+            {
+              "role": "ORGADMIN",
+              "logical": "OR",
+              "permissions": [
+                "FOLDER_SHARE:READ"
+              ]
+            },
+            {
+              "role": "USER",
+              "logical": "OR",
+              "permissions": [
+                "FOLDER_SHARE:READ"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "setting",
+      "order": 3,
+      "title": "系统管理与设置",
+      "icon": "build",
+      "children": [
+        {
+          "order": 1,
+          "title": "账号管理",
+          "name": "xsky_account",
+          "url": "/xsky/account",
+          "templateUrl": "project/html/account/account-list.html",
+          "requiredPermissions": [
+            {
+              "role": "ADMIN",
+              "logical": "OR",
+              "permissions": [
+                "ACCOUNT:MANAGER"
+              ]
+            }
+          ]
+        },
+        {
+          "order": 2,
+          "title": "配额管理",
+          "name": "fs_xsky_quota",
+          "url": "/fs/xsky/quota",
+          "templateUrl": "project/html/quota/quota-list.html",
+          "requiredPermissions": [
+            {
+              "role": "ADMIN",
+              "logical": "OR",
+              "permissions": [
+                "QUOTA:READ"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "quota",
+          "order": 3,
+          "title": "配额管理",
+          "icon": "receipt",
+          "name": "fs-quota-workspace",
+          "url": "/fs/quotaworkspace",
+          "templateUrl": "project/html/quota/quota-workspace-list.html",
+          "requiredPermissions": [
+            {
+              "role": "ORGADMIN",
+              "logical": "OR",
+              "permissions": [
+                "QUOTA_WORKSPACE:READ"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "quota_user",
+          "order": 4,
+          "title": "配额",
+          "icon": "receipt",
+          "name": "fs-quota-user",
+          "url": "/fs/quota-user",
+          "templateUrl": "project/html/quota/quota-user-list.html",
+          "requiredPermissions": [
+            {
+              "role": "USER",
+              "logical": "OR",
+              "permissions": [
+                "QUOTA_USER:READ"
+              ]
+            }
+          ]
+        },
+        {
+          "order": 5,
+          "title": "流程管理",
+          "name": "fs_flow_manager",
+          "url": "/fs/flow",
+          "templateUrl": "web-public/fit2cloud/html/process/process-management.html",
+          "requiredPermissions": [
+            {
+              "role": "ADMIN",
+              "logical": "OR",
+              "permissions": [
+                "FLOW:MANAGER"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "price-setting",
+          "order": 6,
+          "title": "价格策略",
+          "name": "price-policy",
+          "url": "/price-policy",
+          "templateUrl": "project/html/policy/policy-list.html",
+          "requiredPermissions": [
+            {
+              "role": "ADMIN",
+              "logical": "OR",
+              "permissions": [
+                "POLICY:READ",
+                "POLICY:READ+CREATE",
+                "POLICY:READ+EDIT",
+                "POLICY:READ+DELETE"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "bucket-type-setting",
+          "order": 6,
+          "title": "存储类型",
+          "name": "bucket-type",
+          "url": "/bucket-type",
+          "templateUrl": "project/html/buckettype/bucket-type-list.html",
+          "requiredPermissions": [
+            {
+              "role": "ADMIN",
+              "logical": "OR",
+              "permissions": [
+                "POLICY:READ",
+                "POLICY:READ+CREATE",
+                "POLICY:READ+EDIT",
+                "POLICY:READ+DELETE"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

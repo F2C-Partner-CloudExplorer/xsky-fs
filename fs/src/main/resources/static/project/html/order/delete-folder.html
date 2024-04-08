@@ -1,0 +1,112 @@
+<div class="side-info" cg-busy="{promise:orderLoadingLayer,minDuration:500}" layout-fill>
+    <md-toolbar class="content-toolbar">
+        <div class="md-toolbar-tools">
+            <div ng-if="type === 'view'">订单详情</div>
+            <div flex></div>
+            <md-button class="md-primary" ng-click="toggleForm()">关闭</md-button>
+        </div>
+    </md-toolbar>
+    <md-content>
+        <table layout-fill class="table order-table">
+            <tbody ng-repeat="orderItem in currentOrder.orderItemList">
+            <tr class="order-head" style="height: 50px;">
+                <td style="width: 50px; text-align: center; padding: 0">
+                    <md-button ng-if="!orderItem.show" class="md-icon-button" ng-click="show(orderItem)">
+                        <md-icon>chevron_right</md-icon>
+                    </md-button>
+                    <md-button ng-if="orderItem.show" class="md-icon-button" ng-click="show(orderItem)">
+                        <md-icon>expand_more</md-icon>
+                    </md-button>
+                </td>
+                <td>删除文件系统</td>
+                <td>数量:{{orderItem.count}}</td>
+            </tr>
+            <tr ng-show="orderItem.show">
+                <td colspan="5">
+                    <div style="margin-top: 15px">
+                        <md-tabs layout-fill md-dynamic-height md-border-bottom>
+                            <md-tab label="配置信息">
+                                <md-content class="md-padding">
+                                    <div  layout="row" style="margin-bottom: 10px">
+                                        <div class="element-label flex-30" flex="30">名称:</div>
+                                        <div flex="70" class="text-value ng-binding flex-70">{{orderItem.details.name}}</div>
+                                        <div class="element-label flex-30" flex="30">存储池:</div>
+                                        <div flex="70" class="text-value ng-binding flex-70">{{orderItem.details.poolName}}</div>
+                                    </div>
+                                </md-content>
+                            </md-tab>
+                        </md-tabs>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div layout-fill class="order-info">
+            <div class="order-info-head">
+                <span>更多信息</span>
+            </div>
+            <div class="order-info-content">
+                <div style="margin-top: 15px">
+                    <md-tabs layout-fill md-dynamic-height md-border-bottom>
+                        <md-tab label="订单信息">
+                            <md-content class="md-padding">
+                                <table layout-fill>
+                                    <tr>
+                                        <td class="order-info-label"><span>订单类型:</span></td>
+                                        <td class="order-info-value"><span>申请文件共享</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="order-info-label"><span>申请人:</span></td>
+                                        <td class="order-info-value"><user-info ng-if="currentOrder.applyUser" user-id="currentOrder.applyUser"></user-info></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="order-info-label"><span>申请时间:</span></td>
+                                        <td class="order-info-value"><span>{{currentOrder.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="order-info-label"><span>申请原因:</span></td>
+                                        <td class="order-info-value"><span>{{currentOrder.description}}</span></td>
+                                    </tr>
+                                </table>
+                            </md-content>
+                        </md-tab>
+
+                        <md-tab label="流程日志">
+                            <md-content class="md-padding">
+                                <table class="order-info-process hide-validation-error tree-table" layout-fill>
+                                    <thead>
+                                    <tr>
+                                        <th>环节名称</th>
+                                        <th>执行人</th>
+                                        <th>开始时间</th>
+                                        <th>结束时间</th>
+                                        <th>备注</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="log in logs">
+                                        <td>{{log.taskName}}</td>
+                                        <td><user-info user-ids="log.executors"></user-info></td>
+                                        <td>{{log.taskStartTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                        <td>{{log.taskEndTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                        <td>{{log.taskRemarks}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </md-content>
+                        </md-tab>
+                    </md-tabs>
+                </div>
+            </div>
+        </div>
+    </md-content>
+
+    <div ng-if="type !== 'view'" layout="row" layout-align="start center" layout-margin>
+        <md-button class="md-raised" ng-click="toggleForm();">
+            取消
+        </md-button>
+        <md-button class="md-raised md-primary" ng-click="changeSubmit(type)">
+            确认
+        </md-button>
+    </div>
+</div>

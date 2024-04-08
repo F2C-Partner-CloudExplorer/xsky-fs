@@ -1,0 +1,46 @@
+<div ng-cloak layout-fill layout="column" cg-busy="{promise:aclLoadingLayer, minDuration:500}">
+    <md-toolbar class="content-toolbar">
+        <div class="md-toolbar-tools">
+            <div>访问列表</div>
+            <div flex></div>
+            <md-button class="md-primary" ng-click="jumpOrToggleForm()">
+                <div>关闭列表</div>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-content flex="100">
+        <div layout-fill layout="column" flex="100">
+            <div layout="column">
+                <table class="tree-table">
+                    <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>IP网段</th>
+                        <th>类型</th>
+                        <th>权限</th>
+                        <th>创建时间</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tr ng-repeat="(index, acl) in aclList">
+                        <td>{{index + 1}}</td>
+                        <td>{{acl.aclName}}</td>
+                        <td>{{acl.typeCN}}</td>
+                        <td>{{acl.permissionCN}}</td>
+                        <td>{{acl.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                        <td>
+                            <table-menus>
+                                <md-menu-item>
+                                    <md-button ng-click="deleteAcl(acl)">
+                                        <md-icon class="md-10">delete</md-icon>
+                                        删除
+                                    </md-button>
+                                </md-menu-item>
+                            </table-menus>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </md-content>
+</div>

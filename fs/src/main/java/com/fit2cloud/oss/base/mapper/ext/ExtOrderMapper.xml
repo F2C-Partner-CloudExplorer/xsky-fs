@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fit2cloud.oss.base.mapper.ext.ExtOrderMapper">
+    <resultMap id="ExtResultMap" type="com.fit2cloud.oss.dto.OrderDTO"
+               extends="com.fit2cloud.oss.base.mapper.OrderMapper.BaseResultMap">
+        <result column="bucket_count" property="bucketCount"/>
+        <collection property="orderItemList" ofType="com.fit2cloud.oss.base.domain.OrderItem" javaType="list">
+            <id column="item_id" property="id"/>
+            <result column="order_id" property="orderId"/>
+            <result column="details" property="details"/>
+            <result column="count" property="count"/>
+        </collection>
+    </resultMap>
+
+    <resultMap id="ProcessInfoResultMap" type="com.fit2cloud.oss.dto.OrderDTO"
+               extends="com.fit2cloud.oss.base.mapper.OrderMapper.BaseResultMap">
+        <result property="modelId" column="model_id"/>
+    </resultMap>
+
+
+    <select id="getOrderDetail" resultMap="ExtResultMap">
+        SELECT
+          fs_order.*,
+          fs_order_item.id            AS item_id,
+          fs_order_item.order_id      AS order_id,
+          fs_order_item.details       AS details,
+          fs_order_item.count         as count
+       FROM fs_order JOIN fs_order_item ON fs_order.id = fs_order_item.order_id
+       WHERE fs_order.id = #{orderId}
+    </select>
+
+    <select id="getOrderProcessInfo" resultMap="ProcessInfoResultMap">
+        SELECT fs_order.*, flow_deploy.model_id as model_id
+        FROM fs_order
+        LEFT JOIN flow_process ON fs_order.process_id = flow_process.process_id
+        LEFT JOIN flow_deploy ON flow_deploy.deploy_id = flow_process.deploy_id
+        WHERE fs_order.id = #{orderId}
+    </select>
+
+    <select id="select" parameterType="map" resultMap="ExtResultMap">
+        SELECT *
+        FROM fs_order
+        <where>
+            <if test="id != null">
+                AND fs_order.id = #{id}
+            </if>
+            <if test="workspaceId != null">
+                AND fs_order.workspace_id = #{workspaceId}
+            </if>
+            <if test="status != null">
+                AND fs_order.status = #{status}
+            </if>
+            <if test="applyUser != null">
+                AND fs_order.apply_user = #{applyUser}
+            </if>
+            <if test="createTime != null">
+                AND fs_order.create_time = #{createTime}
+            </if>
+            <if test="processId != null">
+                AND fs_order.process_id = #{processId}
+            </if>
+            <if test="type != null">
+                AND fs_order.type = #{type}
+            </if>
+            <if test="description != null">
+                AND fs_order.description like #{description}
+            </if>
+        </where>
+    </select>
+
+</mapper>

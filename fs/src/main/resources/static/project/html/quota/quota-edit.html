@@ -1,0 +1,56 @@
+<div layout-fill cg-busy="{promise:quotaEditLoading,minDuration:500}" ng-cloak>
+    <md-toolbar class="content-toolbar">
+        <div class="md-toolbar-tools">
+            <div>{{'i18n_edit_quota' | translator:'编辑配额'}} <span class="color-red">{{quotaSetting.workspaceName}} </span></div>
+        </div>
+    </md-toolbar>
+    <div class="side-content">
+
+        <form name="quotaEditForm">
+            <md-input-container class="md-block" flex-gt-sm ng-if="!quotaSetting.isDefault">
+                <label>{{'i18n_default_quota' | translator:'默认配额'}}</label>
+                <md-switch class="md-primary" ng-model="quotaSetting.fsDefaultSetting"
+                           ng-change="enableDefault(quotaSetting)"></md-switch>
+            </md-input-container>
+
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>{{'i18n_bucket_count' | translator:'文件共享个数'}}</label>
+                <input type="number" min="0" step="1" onkeyup="this.value = Math.abs(parseInt(this.value))" ng-model="quotaSetting.folderCount"
+                       name="folderCount"
+                       ng-disabled="disableCount(quotaSetting)" required>
+                <div ng-messages="quotaEditForm.folderCount.$error">
+                    <div ng-message="required">{{'i18n_must_enter' | translator:'必填'}}.</div>
+                </div>
+            </md-input-container>
+
+<!--            <md-input-container class="md-block" flex-gt-sm>-->
+<!--                <label>文件系统容量</label>-->
+<!--                <input type="number" min="0" step="1" onkeyup="this.value = Math.abs(parseInt(this.value))" ng-model="quotaSetting.folderSize"-->
+<!--                       name="folderSize"-->
+<!--                       ng-disabled="disableCount(quotaSetting)" required>-->
+<!--                <div ng-messages="quotaEditForm.folderCount.$error">-->
+<!--                    <div ng-message="required">{{'i18n_must_enter' | translator:'必填'}}.</div>-->
+<!--                </div>-->
+<!--            </md-input-container>-->
+
+
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>{{'i18n_allow_exceed_quota' | translator:'超额申请'}}</label>
+                <md-select required ng-model="quotaSetting.folderAllocateResourceIfExceed">
+                    <md-option value="YES">{{'i18n_quota_exceed_enable' | translator:'允许'}}</md-option>
+                    <md-option value="NO">{{'i18n_quota_exceed_disable' | translator:'禁止'}}</md-option>
+                    <md-option value="DEFAULT" ng-if="!quotaSetting.isDefault">{{'i18n_quota_exceed_default' | translator:'默认'}}</md-option>
+                </md-select>
+            </md-input-container>
+
+        </form>
+    </div>
+    <div layout="row" layout-align="start center" layout-margin>
+        <md-button class="md-raised" ng-click="toggleForm()">
+            {{'i18n_cancel' | translator:'取消'}}
+        </md-button>
+        <md-button class="md-raised md-primary" ng-click="saveQuota(quotaSetting)" ng-disabled="workspaceForm.$invalid">
+            {{'i18n_save' | translator:'保存'}}
+        </md-button>
+    </div>
+</div>

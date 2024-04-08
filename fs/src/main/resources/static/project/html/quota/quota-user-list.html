@@ -1,0 +1,41 @@
+<div layout-fill class="content-backdrop" ng-controller="QuotaUserController" ng-cloak>
+    <div layout="column" layout-fill>
+        <md-toolbar class="content-toolbar">
+            <div class="md-toolbar-tools">
+                <label>{{'i18n_quota' | translator:'配额'}}</label>
+            </div>
+        </md-toolbar>
+        <div layout="row" flex cg-busy="{promise:loadingLayer,minDuration:500}">
+            <div class="md-padding" layout="column" flex="100">
+                <div flex layout="column" layout-fill>
+                    <table dynamic-table>
+                        <thead>
+                        <tr>
+                            <th width="25%"></th>
+                            <th>文件共享个数</th>
+<!--                            <th>文件系统容量</th>-->
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{'i18n_workspace' | translator:'文件系统'}}</td>
+                            <td>
+                                <span>配额{{quotaSetting.folderCount}}</span>/
+                                <span ng-class="{'color-red':quotaSetting.folderCountUsed > quotaSetting.folderCount}">
+                                     已用{{quotaSetting.folderCountUsed}}
+                                </span>
+                            </td>
+<!--                            <td>-->
+<!--                                 <sapn>配额{{quotaSetting.folderSize}}GB</sapn>/-->
+<!--                                 <span ng-class="{'color-red':quotaSetting.folderSizeUsed > quotaSetting.folderSize}">-->
+<!--                                     已用{{quotaSetting.folderSizeUsed}}GB-->
+<!--                                 </span>-->
+<!--                            </td>-->
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<div layout-fill class="content-backdrop" ng-controller="UserPageController"
+     cg-busy="{promise:loadingLayer,minDuration:500}" ng-cloak>
+    <md-toolbar class="content-toolbar">
+        <div class="md-toolbar-tools">
+            <div>文件用户</div>
+            <md-button class="md-primary" ng-click="edit('user', {})">
+                <md-icon>add_circle_outline</md-icon>
+                创建文件用户
+            </md-button>
+            <md-button class="md-primary" ng-click="edit('user-group', {})">
+                <md-icon>add_circle_outline</md-icon>
+                创建文件用户组
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-content class="md-padding">
+        <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="用户" md-on-select="select('user')" md-active="selected === 'user'" >
+                <div ng-include="userListUrl"></div>
+            </md-tab>
+            <md-tab label="用户组" md-on-select="select('userGroup')" md-active="selected === 'group'" >
+                <div ng-include="userGroupListUrl"></div>
+            </md-tab>
+        </md-tabs>
+    </md-content>
+    <side-form></side-form>
+</div>

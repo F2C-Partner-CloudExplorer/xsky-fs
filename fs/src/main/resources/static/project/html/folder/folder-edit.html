@@ -1,0 +1,97 @@
+<div cg-busy="{promise:formLoadingLayer, minDuration:500}" ng-cloak>
+    <md-toolbar class="content-toolbar">
+        <div class="md-toolbar-tools">
+            <div ng-if="tmpItem.id">编辑文件系统</div>
+            <div ng-if="!tmpItem.id">创建文件系统</div>
+        </div>
+    </md-toolbar>
+    <md-content class="md-padding">
+        <form name="UserUpdateForm">
+            <div class="md-dialog-content" layout="column">
+                <div layout="column">
+                    <md-input-container flex="auto" style="margin-top: 10px">
+                        <label>名称</label>
+                        <input type="text" ng-pattern="/^[a-zA-Z0-9_.\\-]+$/" required  name="name" ng-model="tmpItem.name"/>
+                        <div ng-messages="UserUpdateForm.name.$error">
+                            <div ng-message="required">{{'i18n_required' | translator:'必填'}}.</div>
+                            <div ng-message="pattern">{{'i18n_format' | translator:'格式不对'}}（必须符合: ^[a-zA-Z0-9_.\\-]+$）</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" style="margin-top: -10px" ng-if="accountList.length > 1">
+                        <label>所属设备</label>
+                        <md-select ng-model="tmpItem.accountId" ng-disabled="tmpItem.id" ng-change="onAccountChange(tmpItem.accountId)">
+                            <md-option ng-repeat="account in accountList" value="{{account.id}}">
+                                {{account.description}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" style="margin-top: -10px">
+                        <label>存储池</label>
+                        <md-select ng-model="tmpItem.poolId">
+                            <md-option ng-repeat="pool in poolList" value="{{pool.poolId}}">
+                                {{pool.name}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <label>容量(GB)</label>
+                        <input name="size" required type="number" min="1" ng-model="tmpItem.sizeGB"
+                               ng-change="getFsPricePolicyInfo(tmpItem)">
+                        <div ng-messages="UserUpdateForm.size.$error">
+                            <div ng-message="required">必填.</div>
+                            <div ng-message="min">容量不得小于1GB</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" style="margin-top: -10px">
+                        <label>描述</label>
+                        <input name="description" type="text" ng-maxlength="32" ng-model="tmpItem.description">
+                        <div ng-messages="UserUpdateForm.description.$error">
+                            <div ng-message="maxlength">描述不得多于32个字符</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container flex="auto" ng-if="isAdmin && !tmpItem.id">
+                        <label>组织</label>
+                        <md-select required ng-model="tmpItem.organization" name="organization" ng-change="onOrganizationChange(tmpItem.organization)" md-on-close="searchModel = ''">
+                            <md-select-header class="select-header">
+                                <input class="select-search" ng-model="searchModel" placeholder="按名称搜索" autocomplete="off"
+                                       ng-keydown="$event.stopPropagation()">
+                            </md-select-header>
+                            <md-optgroup label="组织名称">
+                                <md-option ng-repeat="model in organizationList | filter:{name:searchModel}" ng-value="model.id">{{model.name}}
+                                </md-option>
+                            </md-optgroup>
+                        </md-select>
+                    </md-input-container>
+                    <md-input-container flex="auto" ng-if="(isAdmin || isOrgAdmin) && !tmpItem.id">
+                        <label>工作空间</label>
+                        <md-select required ng-model="tmpItem.workspace" name="workspace" md-on-close="searchModel1 = ''"
+                                   ng-change="getFsPricePolicyInfo(tmpItem)">
+                            <md-select-header class="select-header">
+                                <input class="select-search" ng-model="searchModel1" placeholder="按名称搜索" autocomplete="off"
+                                       ng-keydown="$event.stopPropagation()">
+                            </md-select-header>
+                            <md-optgroup label="工作空间名称">
+                                <md-option ng-repeat="space in workspaceList | filter:{name:searchModel1}" ng-value="space.id">{{space.name}}
+                                </md-option>
+                            </md-optgroup>
+                        </md-select>
+                    </md-input-container>
+                </div>
+            </div>
+            <div ng-controller="FolderController"
+                 ng-include="'project/html/policy/fs_apply_price.html'"></div>
+        </form>
+    </md-content>
+        <md-button class="md-raised md-primary" ng-disabled="UserUpdateForm.$invalid"
+                   ng-click="saveFolder(tmpItem)">
+            保存
+        </md-button>
+        <md-button class="md-raised" ng-click="toggleForm()">
+            取消
+        </md-button>
+</div>

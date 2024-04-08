@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{'web-public/fit2cloud/img/fit2cloud/favicon.bmp'}">
+    <title>文件系统服务</title>
+    <!--必要CSS-->
+    <link rel="stylesheet" th:href="@{'/web-public/external/angular-material/angular-material.min.css'}">
+    <link rel="stylesheet" th:href="@{'/web-public/external/angular-busy/angular-busy.min.css'}">
+    <link rel="stylesheet" th:href="@{'/web-public/external/material-icons/material-icons.css'}">
+    <link rel="stylesheet" th:href="@{'/web-public/fit2cloud/css/fit2cloud-style.css?t='+${timestamp}}">
+
+    <!--项目CSS-->
+    <link rel="stylesheet" th:href="@{'project/css/project-style.css?t='+${timestamp}}">
+</head>
+
+<body ng-app="TaskApp" ng-cloak>
+<div style="height: 100%" ng-controller="OrderHandleController" cg-busy="{promise:submitLoadingLayer,minDuration:500}">
+    <md-toolbar class="content-toolbar">
+        <div class="md-toolbar-tools">
+            <div>审批订单</div>
+        </div>
+    </md-toolbar>
+    <md-content class="order-content">
+        <div class="md-padding order-view" ng-include="url"></div>
+        <form name="orderForm" ng-show="orderStatus === 'UNCHECKED'">
+            <div class="md-padding">
+                <md-input-container class="md-block">
+                    <label>审批意见</label>
+                    <textarea name="remarks" md-no-autogrow ng-model="request.remarks" rows="3"
+                              placeholder="驳回必填"></textarea>
+                </md-input-container>
+            </div>
+        </form>
+    </md-content>
+    <div layout="row" layout-align="start center" layout-margin>
+        <md-button class="md-raised md-accent" ng-disabled="commit || !request.remarks" ng-click="reject()"
+                   ng-show="orderStatus === 'UNCHECKED'">
+            驳回
+        </md-button>
+        <md-button class="md-raised md-primary" ng-disabled="orderForm.$invalid || commit"
+                   ng-show="orderStatus === 'UNCHECKED'" ng-click="complete()">
+            通过
+        </md-button>
+    </div>
+</div>
+
+<!--必要JS-->
+<script th:src="@{'web-public/external/external.min.js?t='+${timestamp}}"></script>
+<script th:src="@{'web-public/fit2cloud/js/fit2cloud-common.min.js?t='+${timestamp}}"></script>
+<script th:inline="javascript" type="text/javascript">
+    /*<![CDATA[*/
+    window.appversion = [[${timestamp}]];
+    window.businessKey = [[${businessKey}]];
+    window.taskId = [[${taskId}]];
+    //防止页面后退
+    history.pushState(null, null, document.URL);
+    window.addEventListener('popstate', function () {
+        history.pushState(null, null, document.URL);
+    });
+    if (window.parent.api) window.parent.api.inbox(true);
+    /*]]>*/
+</script>
+<!--可选JS-->
+<script th:src="@{'web-public/fit2cloud/js/process-design.js?t='+${timestamp}}"></script>
+<script th:src="@{'web-public/external/echarts/echarts.min.js'}"></script>
+<script th:src="@{'web-public/external/echarts/fit2cloud-echarts-theme.js?t='+${timestamp}}"></script>
+
+<!--项目JS-->]
+<script th:src="@{'project/js/task.js?t='+${timestamp}}"></script>
+<script th:src="@{'project/js/order/orderHandle.js?t='+${timestamp}}"></script>
+<script th:src="@{'project/js/common/common.js?t='+${timestamp}}"></script>
+</body>
+</html>

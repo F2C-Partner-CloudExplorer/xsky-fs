@@ -1,0 +1,80 @@
+<div cg-busy="{promise:formLoadingLayer, minDuration:500}" ng-cloak>
+    <md-toolbar class="content-toolbar">
+        <div class="md-toolbar-tools">
+            <div ng-if="type === TYPES.CREATE">&nbsp;添加对象存储配额</div>
+            <div ng-if="type === TYPES.UPDATE">编辑对象存储配额</div>
+            <div ng-if="type === TYPES.DEFAULTUPDATE">&nbsp;编辑对象存储默认配额</div>
+        </div>
+    </md-toolbar>
+    <md-content class="md-padding">
+        <form name="QuotaAddForm">
+            <div class="md-dialog-content" layout="column">
+                <div layout="column">
+                    <md-input-container flex="auto" ng-if="type !== TYPES.DEFAULTUPDATE">
+                        <label>组织机构</label>
+                        <md-select ng-if="type === TYPES.CREATE" ng-model="tmpItem.costcenterId" name="costcenterId" required md-on-close="searchModel = ''">
+                            <md-select-header class="select-header">
+                                <input class="select-search" ng-model="searchModel" placeholder="按组织名称搜索" autocomplete="off"
+                                       ng-keydown="$event.stopPropagation()">
+                            </md-select-header>
+                            <md-optgroup label="组织机构名称">
+                                <md-option ng-repeat="model in models | filter:{name:searchModel}" ng-value="model.key">{{model.name}}
+                                </md-option>
+                            </md-optgroup>
+                        </md-select>
+                        <input  type="text" ng-if="type === TYPES.UPDATE"
+                               ng-value="tmpItem.costcenterId | convCostcenterId2Name:orgs" disabled readonly/>
+                    </md-input-container>
+
+                    <md-input-container flex="auto" ng-if="type !== TYPES.DEFAULTUPDATE">
+                        <label>所属环境</label>
+                        <md-select ng-if="type === TYPES.CREATE" ng-model="tmpItem.accountId" name="accountId" required md-on-close="searchModel = ''">
+                            <md-select-header class="select-header">
+                                <input class="select-search" ng-model="searchModel" placeholder="按账号名称搜索" autocomplete="off"
+                                       ng-keydown="$event.stopPropagation()">
+                            </md-select-header>
+                            <md-optgroup label="环境名称">
+                                <md-option ng-repeat="model in models | filter:{name:searchModel}" ng-value="model.key">{{model.name}}
+                                </md-option>
+                            </md-optgroup>
+                        </md-select>
+                        <input  type="text" ng-if="type === TYPES.UPDATE"
+                                ng-value="tmpItem.accountId | convAccountId2Desc: accounts" disabled readonly/>
+                        </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <label>存储桶数量配额</label>
+                        <input type="text" md-maxlength="10" name="bucketNumQuota" ng-model="tmpItem.bucketNumQuota" required/>
+                        <div ng-messages="QuotaAddForm.bucketNumQuota.$error">
+                            <div ng-message="required">必填</div>
+                            <div ng-message="md-maxlength">不超过10个字符</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>存储桶容量配额</label>
+                        <input type="text" md-maxlength="12" name="bucketCapacityQuota" ng-model="tmpItem.bucketCapacityQuota" required/>
+                        <div ng-messages="QuotaAddForm.bucketCapacityQuota.$error">
+                            <div ng-message="required">必填</div>
+                            <div ng-message="md-maxlength">不超过10个字符</div>
+                        </div>
+                    </md-input-container>
+                </div>
+            </div>
+        </form>
+    </md-content>
+        <md-button class="md-raised md-primary" ng-disabled="QuotaAddForm.$invalid"
+                   ng-if="type === TYPES.CREATE"  ng-click="saveAccount(tmpItem, 'create')">
+            保存
+        </md-button>
+        <md-button class="md-raised md-primary" ng-disabled="QuotaAddForm.$invalid"
+                   ng-if="type === TYPES.UPDATE" ng-click="saveAccount(tmpItem, 'update')">
+            保存
+        </md-button>
+        <md-button class="md-raised md-primary" ng-disabled="QuotaAddForm.$invalid"
+                   ng-if="type === TYPES.DEFAULTUPDATE"   ng-click="saveAccount(tmpItem, 'defaultUpdate')">
+            保存
+        </md-button>
+        <md-button class="md-raised" ng-click="toggleForm()">
+            取消
+        </md-button>
+</div>

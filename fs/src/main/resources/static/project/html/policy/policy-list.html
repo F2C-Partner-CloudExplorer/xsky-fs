@@ -1,0 +1,54 @@
+<div layout-fill class="content-backdrop" ng-cloak ng-controller="PolicyController">
+    <div layout="column" layout-fill>
+        <md-toolbar class="content-toolbar">
+            <div class="md-toolbar-tools">
+                <div>价格策略</div>
+                <md-button class="md-primary" has-permissions="POLICY:READ+CREATE" ng-click="editPolicyForm({})">
+                    <md-icon>add_circle_outline</md-icon>
+                    创建
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-content>
+            <md-tabs md-dynamic-height md-border-bottom>
+                <md-tab label="按具体配置" ng-click="select('config')">
+                    <md-content class="md-padding" layout-fill class="content-backdrop" ng-cloak
+                                cg-busy="{promise:loadingLayer,minDuration:500}"
+                                layout="column" layout-fill>
+                        <div layout="row" flex>
+                            <div layout="column" flex="100">
+                                <table dynamic-table columns="columns" execute="list({sql: sql})">
+                                    <tbody>
+                                    <tr ng-repeat="item in items">
+                                        <td>{{item.platform}}</td>
+                                        <td>{{item.capacityPrice}}</td>
+                                        <td>{{item.env}}</td>
+                                        <td has-permissions="POLICY:READ+EDIT,POLICY:READ+DELETE">
+                                            <table-menus>
+                                                <md-menu-item has-permission="POLICY:READ+EDIT">
+                                                    <md-button ng-click="editPolicyForm(item)">
+                                                        <md-icon class="md-18">edit</md-icon>
+                                                        编辑
+                                                    </md-button>
+                                                </md-menu-item>
+                                                <md-menu-item has-permission="POLICY:READ+DELETE">
+                                                    <md-button ng-click="deletePolicy(item)">
+                                                        <md-icon>delete</md-icon>
+                                                        删除
+                                                    </md-button>
+                                                </md-menu-item>
+                                            </table-menus>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <table-pagination pagination="pagination"></table-pagination>
+                            </div>
+                        </div>
+                    </md-content>
+                </md-tab>
+            </md-tabs>
+        </md-content>
+        <side-form></side-form>
+    </div>
+</div>

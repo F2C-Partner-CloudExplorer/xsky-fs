@@ -1,0 +1,101 @@
+<div layout-fill class="content-backdrop" ng-controller="OrderController" ng-cloak>
+    <div layout="column" layout-fill>
+        <md-toolbar class="content-toolbar">
+            <div class="md-toolbar-tools">
+                <label>订单列表</label>
+            </div>
+        </md-toolbar>
+        <div layout="row" flex cg-busy="{promise:loadingLayer,minDuration:500}">
+            <div class="md-padding" layout="column" flex="100">
+                <filter-tools conditions="conditions" results="filters" search="'true'"
+                              execute="list()">
+                    <div class="filter-item">
+                        <md-button class="md-icon-button md-whiteframe-1dp" ng-click="list()">
+                            <md-tooltip md-delay="300">刷新</md-tooltip>
+                            <md-icon>refresh</md-icon>
+                        </md-button>
+                    </div>
+                </filter-tools>
+                <div flex layout="column" layout-fill>
+                    <table dynamic-table columns="columns" execute="list({sql: sql})">
+                        <tbody>
+                        <tr ng-repeat="item in items"
+                            ng-class="{'tr-selected':selected === item.$$hashKey}">
+                            <td ng-switch="item.type">
+                                <span ng-switch-when="CREATE_FOLDER">文件系统申请</span>
+                                <span ng-switch-when="UPDATE_FOLDER">文件系统变更</span>
+                                <span ng-switch-when="DELETE_FOLDER">文件系统删除</span>
+                                <span ng-switch-when="CREATE_SHARE">文件共享申请</span>
+                                <span ng-switch-when="UPDATE_SHARE">文件共享变更</span>
+                                <span ng-switch-when="DELETE_SHARE">文件共享删除</span>
+                                <span ng-switch-default>{{item.type}}</span>
+                            </td>
+                            <td>
+                                <a href="#" class="md-primary text-click" ng-click="showOrderDetail(item, 'view')">
+                                    {{item.id}}
+                                </a>
+                            </td>
+                            <td>
+                                <workspace-info id="item.workspaceId"></workspace-info>
+                            </td>
+                            <td>
+                                {{item.account}}
+                            </td>
+                            <td ng-bind="item.createTime | date:'yyyy-MM-dd HH:mm'"></td>
+                            <td><user-info user-id="item.applyUser"></user-info></td>
+                            <td ng-switch="item.status">
+                                <span ng-switch-when="UNCHECKED">审批中</span>
+                                <span ng-switch-when="APPROVED">已审批</span>
+                                <span ng-switch-when="TERMINATED">已终止</span>
+                                <span ng-switch-when="CANCELED">已作废</span>
+                                <span ng-switch-when="REJECTED">已驳回</span>
+                                <span ng-switch-when="PROCESSING">
+                                    <button ng-click="showOrderLog(item)" class="order-button order-button-processing">
+                                        <i class="fas fa-sync-alt fa-spin"></i>&nbsp;正在处理...
+                                    </button>
+                                </span>
+                                <span ng-switch-when="FINISHED">
+                                    <button ng-click="showOrderLog(item)" class="order-button order-button-success">已完成</button>
+                                </span>
+                                <span ng-switch-when="ERROR">
+                                    <button ng-click="showOrderLog(item)" class="order-button order-button-error">异常</button>
+                                </span>
+                                <span ng-switch-when="WARNING">警告</span>
+                            </td>
+<!--                            <td ng-init="getExtendInfo(item)">-->
+<!--                                <div ng-if="!item.resources">-->
+<!--                                    &nbsp;加载中...-->
+<!--                                </div>-->
+<!--                                <div ng-if="item.resources">-->
+<!--                                    <a ng-click="goResource(item)" ng-if="item.bucketCount>0" class="md-primary" href=""-->
+<!--                                       style="cursor:pointer; text-decoration: underline;">-->
+<!--                                        {{item.bucketCount}}个存储桶-->
+<!--                                    </a>-->
+<!--                                </div>-->
+<!--                            </td>-->
+                            <td>
+                                <table-menus>
+                                    <md-menu-item>
+                                        <md-button ng-click="showOrderDetail(item, 'view')">
+                                            <md-icon class="md-18">view_headline</md-icon>
+                                            查看订单
+                                        </md-button>
+                                    </md-menu-item>
+                                    <md-menu-item ng-if="item.status == 'PROCESSING' || item.status == 'FINISHED' || item.status == 'WARNING' || item.status == 'ERROR' || item.status == 'CANCELED'">
+                                        <md-button ng-click="showOrderLog(item)">
+                                            <md-icon class="md-18">cloud_done</md-icon>
+                                            查看资源日志
+                                        </md-button>
+                                    </md-menu-item>
+                                </table-menus>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table-pagination pagination="pagination"></table-pagination>
+                </div>
+            </div>
+        </div>
+        <side-form></side-form>
+    </div>
+</div>

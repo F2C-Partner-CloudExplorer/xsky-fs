@@ -1,0 +1,34 @@
+<div layout-fill class="content-backdrop" ng-controller="SharePageController"
+     cg-busy="{promise:loadingLayer,minDuration:500}" ng-cloak>
+    <md-toolbar class="content-toolbar">
+        <div class="md-toolbar-tools">
+            <div>文件共享</div>
+            <md-button class="md-primary" ng-click="edit('ftp', {})">
+                <md-icon>add_circle_outline</md-icon>
+                申请FTP共享
+            </md-button>
+            <md-button class="md-primary" ng-click="edit('smb', {})">
+                <md-icon>add_circle_outline</md-icon>
+                申请SMB/CIFS共享
+            </md-button>
+            <md-button class="md-primary" ng-click="edit('nfs', {})">
+                <md-icon>add_circle_outline</md-icon>
+                申请NFS共享
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-content class="md-padding">
+        <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="FTP共享" md-on-select="select('ftp')" md-active="selected === 'ftp'" >
+                <div ng-include="ftpShareListUrl"></div>
+            </md-tab>
+            <md-tab label="SMB/CIFS共享" md-on-select="select('smb')" md-active="selected === 'smb'" >
+                <div ng-include="smbShareListUrl"></div>
+            </md-tab>
+            <md-tab label="NFS共享" md-on-select="select('nfs')" md-active="selected === 'nfs'" >
+                <div ng-include="nfsShareListUrl"></div>
+            </md-tab>
+        </md-tabs>
+    </md-content>
+    <side-form></side-form>
+</div>

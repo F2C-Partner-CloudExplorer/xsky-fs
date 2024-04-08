@@ -1,0 +1,108 @@
+<table layout-fill class="table order-table">
+    <tbody ng-repeat="orderItem in currentProduct.orderItemList">
+    <tr class="order-head" style="height: 50px;">
+        <td style="width: 50px; text-align: center; padding: 0">
+            <md-button ng-if="!orderItem.show" class="md-icon-button" ng-click="show(orderItem)">
+                <md-icon>chevron_right</md-icon>
+            </md-button>
+            <md-button ng-if="orderItem.show" class="md-icon-button" ng-click="show(orderItem)">
+                <md-icon>expand_more</md-icon>
+            </md-button>
+        </td>
+        </td>
+        <td ng-if="currentProduct.type == 'DELETE_FOLDER'">删除文件系统</td>
+        <td ng-if="currentProduct.type == 'DELETE_SHARE'">删除文件共享</td>
+
+        <td>数量:{{orderItem.count}}</td>
+        <td>预估单价: {{orderItem.totalPrice}} 元</td>
+    </tr>
+    <tr ng-show="orderItem.show">
+        <td colspan="5">
+            <div style="margin-top: 15px">
+                <md-tabs layout-fill md-dynamic-height md-border-bottom>
+                    <md-tab label="配置信息">
+                        <md-content class="md-padding">
+                            <div  layout="row" style="margin-bottom: 10px" ng-if="currentProduct.type == 'DELETE_FOLDER'">
+                                <div class="element-label flex-30" flex="30">名称:</div>
+                                <div flex="70" class="text-value ng-binding flex-70">{{orderItem.details.name}}</div>
+                                <div class="element-label flex-30" flex="30">存储池:</div>
+                                <div flex="70" class="text-value ng-binding flex-70">{{orderItem.details.poolName}}</div>
+                            </div>
+
+                            <div  layout="row" style="margin-bottom: 10px" ng-if="currentProduct.type == 'DELETE_FOLDER'">
+                                <div class="element-label flex-30" flex="30">容量(GB):</div>
+                                <div flex="70" class="text-value ng-binding flex-70">{{orderItem.details.sizeGB}}</div>
+                                <div class="element-label flex-30" flex="30">使用率:</div>
+                                <div flex="70" class="text-value ng-binding flex-70">{{orderItem.details.usedRate}}</div>
+                            </div>
+
+                            <div  layout="row" style="margin-bottom: 10px" ng-if="currentProduct.type == 'CREATE_FOLDER'">
+                                <div class="element-label flex-30" flex="30">名称:</div>
+                                <div flex="70" class="text-value ng-binding flex-70">{{orderItem.details.name}}</div>
+                                <div class="element-label flex-30" flex="30">存储池:</div>
+                                <div flex="70" class="text-value ng-binding flex-70">{{orderItem.details.poolName}}</div>
+                            </div>
+
+                            <div  layout="row" style="margin-bottom: 10px" ng-if="currentProduct.type == 'CREATE_FOLDER'">
+                                <div class="element-label flex-30" flex="30">大小(GB):</div>
+                                <div flex="70" class="text-value ng-binding flex-70">{{orderItem.details.sizeGB}}</div>
+                                <div class="element-label flex-30" flex="30">描述:</div>
+                                <div flex="70" class="text-value ng-binding flex-70">{{orderItem.details.description}}</div>
+                            </div>
+
+                            <div  layout="row" style="margin-bottom: 10px" ng-if="currentProduct.type == 'UPDATE_FOLDER'">
+                                <div class="element-label flex-30" flex="30">名称:</div>
+                                <div flex="70" class="text-value ng-binding flex-70">{{orderItem.details.name}}</div>
+                                <div class="element-label flex-30" flex="30">存储池:</div>
+                                <div flex="70" class="text-value ng-binding flex-70">{{orderItem.details.poolName}}</div>
+                            </div>
+
+                            <div  layout="row" style="margin-bottom: 10px" ng-if="currentProduct.type == 'UPDATE_FOLDER'">
+                                <div class="element-label flex-30" flex="30">大小(GB):</div>
+                                <div flex="70" class="text-value ng-binding flex-70">{{orderItem.details.sizeGB}}</div>
+                                <div class="element-label flex-30" flex="30">描述:</div>
+                                <div flex="70" class="text-value ng-binding flex-70">{{orderItem.details.description}}</div>
+                            </div>
+
+                            <div  layout="row" style="margin-bottom: 10px" ng-if="currentProduct.type == 'DELETE_SHARE'">
+                                <div class="element-label flex-30" flex="30">文件共享:</div>
+                                <div flex="70" class="text-value ng-binding flex-70" ng-if="!orderItem.details.name">/{{orderItem.details.folderName}}/</div>
+                                <div flex="70" class="text-value ng-binding flex-70" ng-if="orderItem.details.name">{{orderItem.details.name}}</div>
+                                <div class="element-label flex-30" flex="30">文件网关组:</div>
+                                <div flex="70" class="text-value ng-binding flex-70">{{orderItem.details.gatewayGroupName}}</div>
+                            </div>
+
+                            <div  layout="row" style="margin-bottom: 10px" ng-if="currentProduct.type == 'CREATE_SHARE'">
+                                <div class="element-label flex-30" flex="30">文件系统: {{orderItem.details.folderName}}</div>
+                                <div class="element-label flex-30" flex="30">文件网关组: {{orderItem.details.gatewayGroupName}}</div>
+                            </div>
+                            <div  layout="row" style="margin-bottom: 10px" ng-if="orderItem.details.aclType != 'nfs' && currentProduct.type == 'CREATE_SHARE'">
+                                <div class="element-label flex-30" flex="30">用户: {{orderItem.details.visitNames}}</div>
+                                <div class="element-label flex-30" flex="30">用户组: {{orderItem.details.visitGroupNames}}</div>
+                            </div>
+                            <div  layout="row" ng-if="orderItem.details.aclType == 'nfs' && currentProduct.type == 'CREATE_SHARE'">
+                                <div class="element-label flex-30" flex="30">客户端: {{orderItem.details.visitNames}}</div>
+                                <div class="element-label flex-30" flex="30">客户端组: {{orderItem.details.visitGroupNames}}</div>
+                            </div>
+
+                            <div  layout="row" style="margin-bottom: 10px" ng-if="currentProduct.type == 'UPDATE_SHARE'">
+                                <div class="element-label flex-30" flex="30">文件系统: {{orderItem.details.folderName}}</div>
+                                <div class="element-label flex-30" flex="30">文件网关组: {{orderItem.details.gatewayGroupName}}</div>
+                            </div>
+                            <div  layout="row" style="margin-bottom: 10px" ng-if="orderItem.details.aclType != 'nfs' && currentProduct.type == 'UPDATE_SHARE'">
+                                <div class="element-label flex-30" flex="30">用户: {{orderItem.details.visitNames}}</div>
+                                <div class="element-label flex-30" flex="30">用户组: {{orderItem.details.visitGroupNames}}</div>
+                            </div>
+                            <div  layout="row" ng-if="orderItem.details.aclType == 'nfs' && currentProduct.type == 'UPDATE_SHARE'">
+                                <div class="element-label flex-30" flex="30">客户端: {{orderItem.details.visitNames}}</div>
+                                <div class="element-label flex-30" flex="30">客户端组: {{orderItem.details.visitGroupNames}}</div>
+                            </div>
+
+                        </md-content>
+                    </md-tab>
+                </md-tabs>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>

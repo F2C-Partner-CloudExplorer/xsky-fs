@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fit2cloud.oss.base.mapper.ext.ExtFsXskyFolderMapper">
+
+  <select id="selectFtpSharedFileByFolderId" resultType="com.fit2cloud.oss.dto.SharedFileDTO">
+    select
+        gateway_group_name  gatewayGroupName,
+        status,
+        folder_name sharedPath,
+        gateway_group_id gatewayGroupId,
+        name,
+        'FTP' as fileType,
+        account_id accountId
+    from fs_xsky_ftp_share where folder_id = #{folderId}
+  </select>
+  <select id="selectSmbSharedFileByFolderId" resultType="com.fit2cloud.oss.dto.SharedFileDTO">
+    select
+        gateway_group_name  gatewayGroupName,
+        status,
+        folder_name sharedPath,
+        gateway_group_id gatewayGroupId,
+        name,
+        'SMB' as fileType,
+        account_id accountId
+    from fs_xsky_smb_share where folder_id = #{folderId}
+  </select>
+  <select id="selectNfsSharedFileByFolderId" resultType="com.fit2cloud.oss.dto.SharedFileDTO">
+    select
+        gateway_group_name  gatewayGroupName,
+        status,
+        folder_name sharedPath,
+        gateway_group_id gatewayGroupId,
+        name,
+        'NFS' as fileType,
+        account_id accountId
+     from fs_xsky_nfs_share where folder_id = #{folderId}
+  </select>
+</mapper>

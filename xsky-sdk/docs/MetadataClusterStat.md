@@ -1,0 +1,31 @@
+# MetadataClusterStat
+
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**availableDataKbyte** | **Long** |  |  [optional]
+**create** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
+**deleteLatencyUs** | **Double** |  |  [optional]
+**deleteOps** | **Double** |  |  [optional]
+**gcDataKbyte** | **Long** |  |  [optional]
+**listLatencyUs** | **Double** |  |  [optional]
+**listOps** | **Double** |  |  [optional]
+**numAvailableInodes** | **Long** |  |  [optional]
+**numGcInodes** | **Long** |  |  [optional]
+**numInodes** | **Long** |  |  [optional]
+**numUsedInodes** | **Long** |  |  [optional]
+**readLatencyUs** | **Double** |  |  [optional]
+**readOps** | **Double** | primary metadata service stat |  [optional]
+**recordedDataKbyte** | **Long** | data kbyte used by user, different from UsedDataKbyte |  [optional]
+**recoveryDone** | **Long** |  |  [optional]
+**recoveryLeftSecond** | **Double** |  |  [optional]
+**recoveryOps** | **Double** |  |  [optional]
+**recoveryTotal** | **Long** |  |  [optional]
+**totalDataKbyte** | **Long** |  |  [optional]
+**totalKbyte** | **Long** |  |  [optional]
+**trashFiles** | **Long** |  |  [optional]
+**trashKbyte** | **Long** |  |  [optional]
+**usedDataKbyte** | **Long** |  |  [optional]
+**usedKbyte** | **Long** |  |  [optional]
+**writeLatencyUs** | **Double** |  |  [optional]
+**writeOps** | **Double** |  |  [optional]

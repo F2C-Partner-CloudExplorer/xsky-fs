@@ -1,0 +1,108 @@
+<div cg-busy="{promise:formLoadingLayer, minDuration:500}" ng-cloak>
+    <md-toolbar class="content-toolbar">
+        <div class="md-toolbar-tools">
+            <div>申请存储桶</div>
+        </div>
+    </md-toolbar>
+    <md-content class="md-padding">
+        <form name="BucketAddForm">
+            <div class="md-dialog-content" layout="column">
+                <div layout="column">
+                    <md-input-container flex="auto">
+                        <label>所属环境</label>
+                        <md-select ng-model="tmpItem.content.accountId" name="accountId" required ng-change="listOsUserChange()" md-on-close="searchModel = ''">
+                            <md-select-header class="select-header">
+                                <input class="select-search" ng-model="searchModel" placeholder="按名称搜索" autocomplete="off"
+                                       ng-keydown="$event.stopPropagation()">
+                            </md-select-header>
+                            <md-optgroup label="所属环境名称">
+                                <md-option ng-repeat="model in xskyAccounts | filter:{name:searchModel}" ng-value="model.key">{{model.name}}
+                                </md-option>
+                            </md-optgroup>
+                        </md-select>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>存储桶名称</label>
+                        <input type="text" md-maxlength="15" name="name" ng-model="tmpItem.content.name" placeholder="存储桶名称全集群唯一，必须小写英文，名称不能带有下划线_,不可重复" required/>
+                        <div ng-messages="BucketAddForm.name.$error">
+                            <div ng-message="required">必填</div>
+                            <div ng-message="md-maxlength">不超过15个字符</div>
+                            <span class="error" ng-show="nameshow"><br/>存储桶名称全集群唯一，必须小写英文，名称不能带有下划线_,不可重复!</span>
+                        </div>
+                    </md-input-container>
+                    <md-input-container flex="auto" style="margin-top: -10px">
+                        <label>设置拥有者</label>
+                        <md-select ng-model="tmpItem.content.ownerId" name="ownerId" required md-on-close="searchModel = ''">
+                            <md-select-header class="select-header">
+                                <input class="select-search" ng-model="searchModel" placeholder="按名称搜索" autocomplete="off"
+                                       ng-keydown="$event.stopPropagation()">
+                            </md-select-header>
+                            <md-optgroup label="用户名称">
+                                <md-option ng-repeat="ossUser in ossUsers | filter:{name:searchModel}" ng-value="ossUser.key">{{ossUser.name}}
+                                </md-option>
+                            </md-optgroup>
+                        </md-select>
+                    </md-input-container>
+<!--                    <md-input>-->
+<!--                        <label>读写保护(开启时多版本保护自动关闭)</label><br/>-->
+<!--                        <input type="radio"  name="worm" ng-model="tmpItem.content.worm"-->
+<!--                               ng-value="true" ng-checked="true"/> 是-->
+<!--                        <input type="radio"  name="worm" ng-model="tmpItem.content.worm"-->
+<!--                               ng-value="false" style="margin-left: 20px;" /> 否-->
+<!--                    </md-input>-->
+                    <md-input-container class="md-block">
+                        <label>容量配额(GB)</label>
+                        <input type="number"step="0.01"
+                               id="quotaMaxSize" name="quotaMaxSize" min="0"
+                               ng-model="tmpItem.content.quotaMaxSizeG"
+                               placeholder="单位/GB;0代表无限制" required/>
+                        <div ng-messages="BucketAddForm.email.$error">
+                            <div ng-message="required">必填</div>
+                            <div ng-message="md-maxlength">不超过30个字符</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container flex="auto" ng-if="isAdmin" style="margin-top: -10px">
+                        <label>组织</label>
+                        <md-select ng-model="tmpItem.costcenterId" required name="costcenterId" ng-change="listWorkSpaceChange()" md-on-close="searchModel = ''">
+                            <md-select-header class="select-header">
+                                <input class="select-search" ng-model="searchModel" placeholder="按组织名称搜索" autocomplete="off"
+                                       ng-keydown="$event.stopPropagation()">
+                            </md-select-header>
+                            <md-optgroup label="组织机构名称">
+                                <md-option ng-repeat="model in models | filter:{name:searchModel}" ng-value="model.key">{{model.name}}
+                                </md-option>
+                            </md-optgroup>
+                        </md-select>
+                        <div ng-messages="BucketAddForm.costcenterId.$error">
+                            <div ng-message="required">必填</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container flex="auto" ng-if="isAdmin || isOrgAdmin">
+                        <label>工作空间</label>
+                        <md-select ng-model="tmpItem.groupId" name="groupId" required md-on-close="searchModel = ''">
+                            <md-select-header class="select-header">
+                                <input class="select-search" ng-model="searchModel" placeholder="按名称搜索" autocomplete="off"
+                                       ng-keydown="$event.stopPropagation()">
+                            </md-select-header>
+                            <md-optgroup label="工作空间名称">
+                                <md-option ng-repeat="group in groups | filter:{name:searchModel}" ng-value="group.key">{{group.name}}
+                                </md-option>
+                            </md-optgroup>
+                        </md-select>
+                        <div ng-messages="BucketAddForm.groupId.$error">
+                            <div ng-message="required">必填</div>
+                        </div>
+                    </md-input-container>
+                </div>
+            </div>
+        </form>
+    </md-content>
+        <md-button class="md-raised md-primary" ng-disabled="BucketAddForm.$invalid"
+                   ng-click="saveAccount(tmpItem, 'CREATE')">
+            保存
+        </md-button>
+        <md-button class="md-raised" ng-click="toggleForm()">
+            取消
+        </md-button>
+</div>

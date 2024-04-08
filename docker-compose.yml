@@ -1,0 +1,18 @@
+version: '2.1'
+services:
+
+  fs-service:
+    image: registry.fit2cloud.com/north/xsky-fs-service:dev-preview-zxqh
+    container_name: fs-service
+    restart: always
+    volumes:
+      - share-volume:/opt/fit2cloud/share
+      - host-opt-fit2cloud-conf:/opt/fit2cloud/conf
+      - host-opt-fit2cloud-logs:/opt/fit2cloud/logs
+      - host-opt-fit2cloud-upload:/opt/fit2cloud/upload
+    mem_limit: 1024m
+    depends_on:
+      management-center:
+        condition: service_healthy
+    networks:
+      - cmp-network

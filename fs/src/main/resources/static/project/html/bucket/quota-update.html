@@ -1,0 +1,34 @@
+<div ng-cloak cg-busy="{promise:loadingLayer1,minDuration:500}">
+    <md-toolbar class="content-toolbar">
+        <div class="md-toolbar-tools">
+            <div>组织域名后缀</div>
+        </div>
+    </md-toolbar>
+    <form name="AccountEditForm" class="md-padding">
+        <div layout="column">
+            <md-input-container flex="auto">
+                <label>组织机构</label>
+                <input type="text"  name="name" ng-model="item.name" readonly/>
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <label>域名后缀</label>
+                <input type="text" md-maxlength="10" name="suffix" ng-model="item.suffix" required/>
+                <div ng-messages="DomainAddForm.suffix.$error">
+                    <div ng-message="required">必填</div>
+                    <div ng-message="md-maxlength">不超过10个字符</div>
+                </div>
+            </md-input-container>
+        </div>
+
+    </form>
+    <div layout="row" layout-align="start center" layout-margin>
+        <md-button class="md-raised md-primary" ng-disabled="AccountEditForm.$invalid"
+                   ng-click="saveAccount(item,'update')">
+            保存
+        </md-button>
+        <md-button class="md-raised" ng-click="toggleForm();">
+            取消
+        </md-button>
+    </div>
+</div>

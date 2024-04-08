@@ -1,0 +1,20 @@
+<table layout-fill class="table order-table" ng-if="shareInfo!=null">
+    <thead>
+    <tr>
+        <th>
+            产品名称
+        </th>
+        <th>
+            预估单价(元)
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="order-head" style="height: 50px;">
+        <td>{{shareInfo.name}}</td>
+        <td>
+            {{shareInfo.totalPrice}}
+        </td>
+    </tr>
+    </tbody>
+</table>

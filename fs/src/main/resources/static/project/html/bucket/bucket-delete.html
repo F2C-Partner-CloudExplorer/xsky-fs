@@ -1,0 +1,38 @@
+<div cg-busy="{promise:formLoadingLayer, minDuration:500}" ng-cloak>
+    <md-toolbar class="content-toolbar">
+        <div class="md-toolbar-tools">
+            <div>删除存储桶</div>
+        </div>
+    </md-toolbar>
+    <md-content class="md-padding">
+        <form name="BucketUpdateForm">
+            <div class="md-dialog-content" layout="column">
+                <div layout="column">
+                    <md-input-container class="md-block">
+                        <label>所属环境</label>
+                        <input type="text"  name="accountId" ng-value="tmpItem.accountId | convAccountId2Desc:accounts" readonly/>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>存储桶名称</label>
+                        <input type="text" name="name" ng-model="tmpItem.name" readonly/>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                            <label>删除原因</label>
+                            <textarea id="remarks" name="remarks" ng-model="tmpItem.taskRemarks" md-no-autogrow  rows="3" placeholder="填写处理意见"></textarea>
+                            <div ng-messages="taskForm.remarks.$error">
+                                <div ng-message="required">必填.</div>
+                            </div>
+                    </md-input-container>
+
+                </div>
+            </div>
+        </form>
+    </md-content>
+    <md-button class="md-raised md-primary" ng-disabled="BucketUpdateForm.$invalid"
+               ng-click="deleteFlow(tmpItem)">
+        保存
+    </md-button>
+    <md-button class="md-raised" ng-click="toggleForm()">
+        取消
+    </md-button>
+</div>

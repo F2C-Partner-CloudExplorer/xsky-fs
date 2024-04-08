@@ -1,0 +1,375 @@
+/*!
+ * 项目CSS，有特殊需求就写在这里。
+**/
+
+.f2c-eye {
+    position: absolute;
+    right: 0;
+    line-height: 35px;
+    cursor: pointer;
+}
+
+.f2c-plugin-icon {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    margin-right: 2px;
+}
+
+.select-search {
+    border: none;
+    outline: none;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    background-color: transparent;
+}
+
+.select-header {
+    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1), 0 0 0 0 rgba(0, 0, 0, 0.14), 0 0 0 0 rgba(0, 0, 0, 0.12);
+    padding-left: 32px;
+    height: 48px;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: auto;
+}
+
+table.db {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: .01em;
+    line-height: 20px;
+    width: 100%;
+    text-align: left;
+    border: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 0;
+    outline: 0;
+    padding: 0;
+    vertical-align: baseline;
+}
+
+table.db tbody, thead, tr {
+    border: 0;
+    font-family: inherit;
+    font-size: 100%;
+    font-style: inherit;
+    font-weight: inherit;
+    margin: 0;
+    outline: 0;
+    padding: 0;
+    vertical-align: baseline;
+}
+
+table.db td {
+    max-width: none;
+    min-width: 0;
+    white-space: normal;
+    position: relative;
+    vertical-align: top;
+    word-wrap: break-word;
+    padding: 4px 16px;
+    text-align: left;
+    width: auto;
+}
+
+.tree-table {
+    border-top: 1px solid #e1e1e1;
+    border-right: 1px solid #e1e1e1;
+    width: 100%;
+    outline: 0;
+    border-spacing: 0;
+    overflow: hidden;
+    border-radius: 0;
+}
+
+.tree-table thead > tr, .tree-table tbody > tr {
+    height: 44px;
+}
+
+.tree-table thead > tr > th {
+    background-color: #e8e8e8;
+    border-left: 1px solid #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;;
+    padding: 0 10px;
+    text-align: left;
+    vertical-align: middle;
+    font-weight: normal;
+}
+
+.tree-table tbody > tr > td {
+    border-left: 1px solid #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
+    padding: 0 10px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.tree-table tbody > tr > td > md-input-container {
+    margin: 0;
+}
+
+.tree-table > tbody > tr > td:hover .hide-content * {
+    display: inline-block;
+}
+
+.side-content {
+    padding: 16px;
+    min-height: 120px;
+    height: calc(100% - 154px);
+    overflow: auto;
+}
+
+.color-red {
+    color: red
+}
+
+.big-tab-chart-progress {
+    border-radius: 5px;
+    display: inline-block;
+    width: 100%;
+    background-color: #ddd;
+}
+
+.big-tab-chart-bar {
+    border-radius: 5px;
+    height: 10px;
+    background-color: #234a6e;
+    text-align: center;
+    line-height: 10px;
+    font-size: 8px;
+    color: white;
+    width: 0%;
+}
+
+.order-view {
+    overflow-y: auto;
+}
+
+.order-content {
+    height: calc(100% - 122px);
+}
+
+.order-table {
+    border: 1px solid #DFDFDF;
+    margin-bottom: 10px;
+}
+
+.order-table img {
+    vertical-align: middle;
+}
+
+.order-table tr:first-child {
+    border-bottom: 1px solid #DFDFDF;
+}
+
+.order-table tr:first-child td {
+    border-left: 1px solid #DFDFDF;
+}
+
+.order-table .order-head td:first-child {
+    border-left-width: 0;
+}
+
+.order-table md-select {
+    height: 30px;
+}
+
+.order-info {
+    border: 1px solid #DFDFDF;
+    width: calc(100% - 2px);
+}
+
+.order-info-head {
+    min-height: 34px;
+    max-height: 34px;
+    background-color: #F4F4F4;
+}
+
+.order-info-head span {
+    line-height: 34px;
+    padding-left: 14px;
+}
+
+.order-info-head {
+    min-height: 34px;
+    max-height: 34px;
+    background-color: #F4F4F4;
+}
+
+.order-info-head span {
+    line-height: 34px;
+    padding-left: 14px;
+}
+
+.order-info-content {
+    padding: 0 10px;
+}
+
+.order-info-label {
+    width: 10%;
+    text-align: right;
+}
+
+.order-info-value {
+    padding: 5px 15px;
+    width: 90%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.order-info-process th {
+    text-align: start;
+    width: 15%;
+}
+
+.order-info-process th:last-child {
+    width: 40%;
+}
+
+.order-button {
+    color: #FFF;
+    padding: 1px 5px;
+    font-size: 14px;
+    line-height: 1.5;
+    border-radius: 2px;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.order-button-processing {
+    background-color: #095DB1;
+}
+
+.order-button-processing:focus,
+.order-button-processing.focus {
+    color: #fff;
+    background-color: #095DB1;
+    border-color: #095DB1;
+}
+
+.order-button-processing:hover {
+    color: #fff;
+    background-color: #0D6FD1;
+    border-color: #0D6FD1;
+}
+
+.order-button-processing:active, .order-button-processing.active, .open > .dropdown-toggle.order-button-processing {
+    color: #fff;
+    background-color: #095DB1;
+    border-color: #095DB1;
+}
+
+.order-button-processing:active:hover,
+.order-button-processing.active:hover,
+.open > .dropdown-toggle.order-button-processing:hover,
+.order-button-processing:active:focus,
+.order-button-processing.active:focus,
+.open > .dropdown-toggle.order-button-processing:focus,
+.order-button-processing:active.focus,
+.order-button-processing.active.focus,
+.open > .dropdown-toggle.order-button-processing.focus {
+    color: #fff;
+    background-color: #095DB1;
+    border-color: #095DB1;
+}
+
+.order-button-processing:active,
+.order-button-processing.active,
+.open > .dropdown-toggle.order-button-processing {
+    background-image: none;
+}
+
+.order-button-success {
+    background-color: #8FB143;
+}
+
+.order-button-success:focus,
+.order-button-success.focus {
+    color: #fff;
+    background-color: #8FB143;
+    border-color: #8FB143;
+}
+
+.order-button-success:hover {
+    color: #fff;
+    background-color: #A9D051;
+    border-color: #A9D051;
+}
+
+.order-button-success:active, .order-button-success.active, .open > .dropdown-toggle.order-button-success {
+    color: #fff;
+    background-color: #8FB143;
+    border-color: #8FB143;
+}
+
+.order-button-success:active:hover,
+.order-button-success.active:hover,
+.open > .dropdown-toggle.order-button-success:hover,
+.order-button-success:active:focus,
+.order-button-success.active:focus,
+.open > .dropdown-toggle.order-button-success:focus,
+.order-button-success:active.focus,
+.order-button-success.active.focus,
+.open > .dropdown-toggle.order-button-success.focus {
+    color: #fff;
+    background-color: #8FB143;
+    border-color: #8FB143;
+}
+
+.order-button-success:active,
+.order-button-success.active,
+.open > .dropdown-toggle.order-button-success {
+    background-image: none;
+}
+
+.order-button-error {
+    background-color: #FF521B;;
+}
+
+.order-button-error:focus,
+.order-button-error.focus {
+    color: #fff;
+    background-color: #FF521B;
+    border-color: #FF521B;
+}
+
+.order-button-error:hover {
+    color: #fff;
+    background-color: #FF6C3E;
+    border-color: #FF6C3E;
+}
+
+.order-button-error:active, .order-button-error.active, .open > .dropdown-toggle.order-button-error {
+    color: #fff;
+    background-color: #FF521B;
+    border-color: #FF521B;
+}
+
+.order-button-error:active:hover,
+.order-button-error.active:hover,
+.open > .dropdown-toggle.order-button-error:hover,
+.order-button-error:active:focus,
+.order-button-error.active:focus,
+.open > .dropdown-toggle.order-button-error:focus,
+.order-button-error:active.focus,
+.order-button-error.active.focus,
+.open > .dropdown-toggle.order-button-error.focus {
+    color: #fff;
+    background-color: #FF521B;
+    border-color: #FF521B;
+}
+
+.order-button-error:active,
+.order-button-error.active,
+.open > .dropdown-toggle.order-button-error {
+    background-image: none;
+}

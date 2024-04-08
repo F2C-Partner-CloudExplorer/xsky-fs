@@ -1,0 +1,78 @@
+<div cg-busy="{promise:formLoadingLayer, minDuration:500}" ng-cloak>
+    <md-toolbar class="content-toolbar">
+        <div class="md-toolbar-tools">
+            <div ng-if="tmpItem.id">编辑用户</div>
+            <div ng-if="!tmpItem.id">创建用户</div>
+        </div>
+    </md-toolbar>
+    <md-content class="md-padding">
+        <form name="UserUpdateForm">
+            <div class="md-dialog-content" layout="column">
+                <div layout="column">
+                    <md-input-container flex="auto" style="margin-top: 10px">
+                        <label>名称</label>
+                        <input type="text" required  name="name" ng-model="tmpItem.name" />
+                    </md-input-container>
+
+                    <md-input-container class="md-block" style="margin-top: -10px" ng-if="accountList.length > 1">
+                        <label>所属设备</label>
+                        <md-select ng-model="tmpItem.accountId" ng-disabled="tmpItem.id">
+                            <md-option ng-repeat="account in accountList" value="{{account.id}}">
+                                {{account.description}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>密码</label>
+                        <i id="eye1" class="fa fa-eye f2c-eye" aria-hidden="true" ng-click="view(1)"></i>
+                        <input required name="password" ng-model="tmpItem.password" type="password"
+                               autocomplete="off" ng-maxlength="32" ng-minlength="8"
+                               ng-pattern="/^[a-zA-Z0-9_@.()\*\+\-!\^%&]*$/"
+                               id="password1">
+                        <div ng-messages="UserUpdateForm.password.$error">
+                            <div ng-message="required">必填.</div>
+                            <div ng-message="pattern">只支持英文和字母以及常用英文符号</div>
+                            <div ng-message="maxlength">不要多于32个字符</div>
+                            <div ng-message="minlength">不要少于8个字符</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container flex="auto" ng-if="isAdmin && !tmpItem.id" style="margin-top: -10px">
+                        <label>组织</label>
+                        <md-select required ng-model="tmpItem.organization" name="organization" ng-change="onOrganizationChange(tmpItem.organization)" md-on-close="searchModel1 = ''">
+                            <md-select-header class="select-header">
+                                <input class="select-search" ng-model="searchModel1" placeholder="按名称搜索" autocomplete="off"
+                                       ng-keydown="$event.stopPropagation()">
+                            </md-select-header>
+                            <md-optgroup label="组织名称">
+                                <md-option ng-repeat="model in organizationList | filter:{name:searchModel1}" ng-value="model.id">{{model.name}}
+                                </md-option>
+                            </md-optgroup>
+                        </md-select>
+                    </md-input-container>
+                    <md-input-container flex="auto" ng-if="(isAdmin || isOrgAdmin) && !tmpItem.id">
+                        <label>工作空间</label>
+                        <md-select required ng-model="tmpItem.workspace" name="workspace" md-on-close="searchModel2 = ''">
+                            <md-select-header class="select-header">
+                                <input class="select-search" ng-model="searchModel2" placeholder="按名称搜索" autocomplete="off"
+                                       ng-keydown="$event.stopPropagation()">
+                            </md-select-header>
+                            <md-optgroup label="工作空间名称">
+                                <md-option ng-repeat="space in workspaceList | filter:{name:searchModel2}" ng-value="space.id">{{space.name}}
+                                </md-option>
+                            </md-optgroup>
+                        </md-select>
+                    </md-input-container>
+                </div>
+            </div>
+        </form>
+    </md-content>
+        <md-button class="md-raised md-primary" ng-disabled="UserUpdateForm.$invalid"
+                   ng-click="save('user', tmpItem)">
+            提交
+        </md-button>
+        <md-button class="md-raised" ng-click="toggleForm()">
+            取消
+        </md-button>
+</div>
