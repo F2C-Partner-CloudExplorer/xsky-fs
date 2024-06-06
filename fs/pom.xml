@@ -12,10 +12,9 @@
     <description>fit2cloud3.0-fs</description>
 
     <parent>
-        <artifactId>fit2cloud3.0-fs-parent</artifactId>
+        <artifactId>commons-parent</artifactId>
         <groupId>com.fit2cloud</groupId>
         <version>3.0.0</version>
-        <relativePath/>
     </parent>
 
     <properties>

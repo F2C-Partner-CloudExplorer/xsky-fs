@@ -61,7 +61,7 @@ public class QuotaService {
         if (StringUtils.isNotBlank(organization.getName())) {
             criteria.andNameLike("%" + organization.getName() + "%");
         } else {
-            criteria.andParentIdIsNull();
+            criteria.andPidIsNotNull();
         }
         // 这里description是默认配额的搜索条件
         if (StringUtils.isNotBlank(organization.getDescription())) {
@@ -459,7 +459,7 @@ public class QuotaService {
         OrganizationExample organizationExample = new OrganizationExample();
         OrganizationExample.Criteria criteria1 = organizationExample.createCriteria();
         if (StringUtils.isNotBlank(quotaSearchRequest.getWorkspaceId())) {
-            criteria1.andParentIdEqualTo(quotaSearchRequest.getWorkspaceId());
+            criteria1.andPidEqualTo(quotaSearchRequest.getWorkspaceId());
         }
         return organizationMapper.selectByExample(organizationExample);
     }

@@ -1,7 +1,6 @@
 package com.fit2cloud.oss.job;
 
 import com.fit2cloud.commons.server.model.billing.BillingItem;
-import com.fit2cloud.commons.server.service.BillingRecalculationService;
 import com.fit2cloud.commons.utils.LogUtil;
 import com.fit2cloud.oss.service.FsFtpShareService;
 import com.fit2cloud.oss.service.FsNfsShareService;
@@ -15,8 +14,6 @@ import java.util.List;
 
 @Component
 public class CalculatePriceJob {
-    @Resource
-    private BillingRecalculationService billingService;
     @Resource
     private FsFtpShareService fsFtpShareService;
     @Resource
